@@ -1,5 +1,5 @@
 package entity;
 
-public class A {
-	//test commit
+public class A{
+	//commita da eclipse
 }
