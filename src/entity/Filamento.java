@@ -8,10 +8,11 @@ public class Filamento {
 	private String nome;
 	private double flussoTotale;
 	private double elletticita;
-	private Strumento strumento; 
+	private String nomeStrumento;
+	private String nomeSatellite;
 	
 	
-	public Filamento(int ID, double densitaMedia,double temperaturaMedia, double contrasto, String nome, double flussoTotale, double elletticita, Strumento strumento ) {
+	public Filamento(int ID, double densitaMedia,double temperaturaMedia, double contrasto, String nome, double flussoTotale, double elletticita, String nomeStrumento, String nomeSatellite ) {
      	this.ID = ID;
 		this.densitaMedia = densitaMedia;
 		this.temperaturaMedia = temperaturaMedia;
@@ -19,7 +20,8 @@ public class Filamento {
 		this.nome = nome;
 		this.flussoTotale = flussoTotale;
 		this.elletticita = elletticita;
-		this.strumento = strumento;
+		this.nomeStrumento = nomeStrumento;
+		this.nomeSatellite = nomeSatellite;
 	
 	}
 
@@ -94,14 +96,23 @@ public class Filamento {
 	}
 
 
-	public Strumento getStrumento() {
-		return strumento;
+	public String getNomeStrumento() {
+		return nomeStrumento;
 	}
 
 
-	public void setStrumento(Strumento strumento) {
-		this.strumento = strumento;
+	public void setNomeStrumento(String nomeStrumento) {
+		this.nomeStrumento = nomeStrumento;
 	}
 
+
+	public String getNomeSatellite() {
+		return nomeSatellite;
+	}
+
+
+	public void setNomeSatellite(String nomeSatellite) {
+		this.nomeSatellite = nomeSatellite;
+	}
 	
 }
