@@ -3,12 +3,12 @@ package entity;
 public class posContorno {
 	private double latitudine;
 	private double longitudine;
-	private Filamento filamento;
+	private int idFil;
 	
-	public posContorno (double latitudine, double longitudine, Filamento filamento) {
+	public posContorno (double latitudine, double longitudine, int filamento) {
 		this.latitudine = latitudine;
 		this.longitudine = longitudine;
-		this.filamento=filamento;
+		this.idFil=filamento;
 	}
 
 	public double getLatitudine() {
@@ -27,12 +27,13 @@ public class posContorno {
 		this.longitudine = longitudine;
 	}
 
-	public Filamento getFilamento() {
-		return filamento;
+	public int getIdFil() {
+		return idFil;
 	}
 
-	public void setFilamento(Filamento filamento) {
-		this.filamento = filamento;
+	public void setIdFil(int idFil) {
+		this.idFil = idFil;
 	}
+
 	
 }
