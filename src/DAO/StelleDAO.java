@@ -5,8 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import bean.BeanStella;
 import entity.Stella;
 import entity.posContorno;
+import entity.posScheletro;
 
 //RF 9
 public class StelleDAO {
@@ -226,5 +229,62 @@ public class StelleDAO {
 			e.printStackTrace();
 		}
 		return posizioniContorno;
+	}
+	
+	//RF 12
+	public ArrayList<BeanStella> distanzaStelleSpinaDorsale(int idFil){
+		ArrayList<Stella> stelle = FindStelleInFilamento(idFil);
+		ArrayList<BeanStella> result = new ArrayList<BeanStella>();
+		ArrayList<posScheletro> posSpinaDorsale = LoadPosSpinaDorsaleById(idFil);
+		BeanStella beanStella;
+		for (int i = 0; i < stelle.size(); i++) {
+			double distMin = Integer.MAX_VALUE;
+			for (int j = 0; j< posSpinaDorsale.size(); j++ ) {
+				double distanza = Math.sqrt(Math.pow((stelle.get(i).getLatitudine() - posSpinaDorsale.get(j).getLatitudine()), 2.0) + Math.pow((stelle.get(i).getLongitudine()-posSpinaDorsale.get(j).getLongitudine()), 2.0));
+				if(distanza < distMin) {
+					distMin = distanza;
+				}
+			}
+			beanStella = new BeanStella(stelle.get(i).getId(), stelle.get(i).getValoreFlusso(), distMin, stelle.get(i).getNome());
+			result.add(beanStella);
+		}
+		return result;
+	}
+	
+	public ArrayList<posScheletro> LoadPosSpinaDorsaleById(int idFil){
+		ArrayList<posScheletro> result = new ArrayList<posScheletro>();
+		Connection connection = null;
+		ResultSet resultSet = null;
+		PreparedStatement stmt = null;
+		posScheletro posScheletro;
+		double latitudine;
+		double longitudine;
+		double flusso;
+		int numeroProgressivo;
+		int idScheletro;
+		try {
+			connection = DriverManager.getConnection("jdbc:postgresql:ProgettoDB","postgres","postgres");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			//tipo (boolean) di Scheletro è 1 per la spina dorsale, 0 per i segmenti secondari
+			String sql = "SELECT * FROM PosScheletro JOIN Scheletro ON idScheltro = ID WHERE tipo = 1 AND idScheletro = ?";
+			stmt = connection.prepareStatement(sql);
+			stmt.setInt(1, idFil);
+			resultSet = stmt.executeQuery();
+			while(resultSet.next()) {
+				latitudine = resultSet.getDouble("Latitudine");
+				longitudine = resultSet.getDouble("Longitudine");
+				flusso = resultSet.getDouble("flusso");
+				numeroProgressivo = resultSet.getInt("numeroProgressivo");
+				idScheletro = resultSet.getInt("idScheletro");
+				posScheletro = new posScheletro(latitudine, longitudine, flusso, numeroProgressivo, idScheletro);
+				result.add(posScheletro);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }
