@@ -180,7 +180,7 @@ public class StelleDAO {
 			e.printStackTrace();
 		}
 		try {
-			String sql = "SELECT * FROM \"Stella\"";
+			String sql = "SELECT * FROM Stella";
 			stmt = connection.prepareStatement(sql);
 			resultSet = stmt.executeQuery();
 			while(resultSet.next()) {
