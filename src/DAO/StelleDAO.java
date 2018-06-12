@@ -18,6 +18,9 @@ public class StelleDAO {
 		ArrayList<posContorno> posizioniContorno; 
 		stelle = LoadAllStelle();
 		posizioniContorno = posContornoById(IdFil);
+		if(posizioniContorno.size() == 0) {
+			return stelle;
+		}
 		stelleInFil = new ArrayList<Stella>();
 		for(int i = 0; i <= stelle.size() -1; i++) {
 			Stella stella = stelle.get(i);
@@ -223,7 +226,7 @@ public class StelleDAO {
 				latitudine = resultSet.getDouble("Latitudine");
 				longitudine = resultSet.getDouble("Longitudine");
 				posizioneContorno = new posContorno(latitudine, longitudine, ID);
-				posizioniContorno.add(posizioneContorno);
+				posizioniContorno.add(posizioneContorno);	
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -286,5 +289,10 @@ public class StelleDAO {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	public static void main(String[] args) {
+		StelleDAO dao = new StelleDAO();
+		dao.FindStelleInFilamento(5);
 	}
 }
