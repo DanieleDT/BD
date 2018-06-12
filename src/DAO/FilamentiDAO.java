@@ -411,4 +411,67 @@ public class FilamentiDAO {
 		}
 		return filamenti;
 	}
+	
+	public static boolean existFilamento(int id, Connection conn) {
+		PreparedStatement stmt = null;
+		boolean result = false;
+		ResultSet resultSet = null;
+		try {
+			stmt = conn.prepareStatement("SELECT * FROM filamento WHERE id = ?");
+			stmt.setInt(1, id);
+			resultSet = stmt.executeQuery();
+			
+			result = (resultSet.next());
+			
+			resultSet.close();
+			stmt.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static void insertFilamento(int id, String nome, double flusso, double contrasto, double densita, double temperatura, double ellitticita, String strumento, String satellite,  Connection conn) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("INSERT INTO filamento(id, nome, flussototale, contrasto, densitamedia, tempmedia, ellitticita, nomestrumento, nomesatellite) VALUES (?,?,?,?,?,?,?,?,?);");
+			stmt.setInt(1, id);
+			stmt.setString(2, nome);
+			stmt.setDouble(3, flusso);
+			stmt.setDouble(4, contrasto);
+			stmt.setDouble(5, densita);
+			stmt.setDouble(6, temperatura);
+			stmt.setDouble(7, ellitticita);
+			stmt.setString(8, strumento);
+			stmt.setString(9, satellite);
+			
+			stmt.executeUpdate();
+			
+			stmt.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void updateFilamento(int id, String nome, double flusso, double contrasto, double densita, double temperatura, double ellitticita, String strumento, String satellite,  Connection conn) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("UPDATE filamento SET nome = ?, flussototale = ?, contrasto = ?, densitamesdia = ?, tempmedia = ?, ellitticita = ?, nomstrumento = ?, nomsatellite = ? WHERE id = ?");
+			stmt.setInt(9, id);
+			stmt.setString(1, nome);
+			stmt.setDouble(2, flusso);
+			stmt.setDouble(3, contrasto);
+			stmt.setDouble(4, densita);
+			stmt.setDouble(5, temperatura);
+			stmt.setDouble(6, ellitticita);
+			stmt.setString(7, strumento);
+			stmt.setString(8, satellite);
+			
+			stmt.executeUpdate();
+			
+			stmt.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
