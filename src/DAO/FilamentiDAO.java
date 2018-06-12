@@ -112,7 +112,7 @@ public class FilamentiDAO {
 		PreparedStatement stmt = null;
 		ResultSet resultSet = null;
 		try {
-			String sql = "SELECT count* as num FROM Scheletro WHERE idFIl = ?";
+			String sql = "SELECT count* as num FROM Scheletro WHERE idfIlamento = ?";
 			stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, id);
 			resultSet = stmt.executeQuery(); 
@@ -129,7 +129,7 @@ public class FilamentiDAO {
 		PreparedStatement stmt = null;
 		ResultSet resultSet = null;
 		try {
-			String sql = "SELECT count* as num FROM Scheletro WHERE idFIl =(SELECT id FROM Filamento WHERE nome = ?)";
+			String sql = "SELECT count* as num FROM Scheletro WHERE idfilamento =(SELECT id FROM Filamento WHERE nome = ?)";
 			stmt = connection.prepareStatement(sql);
 			stmt.setString(1, nome);
 			resultSet = stmt.executeQuery(); 
