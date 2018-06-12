@@ -227,4 +227,8 @@ public class StelleDAO {
 		}
 		return posizioniContorno;
 	}
+	public static void main(String[] args) {
+		StelleDAO dao = new StelleDAO();
+		dao.FindStelleInFilamento(5);
+	}
 }
