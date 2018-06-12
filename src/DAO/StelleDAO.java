@@ -15,6 +15,9 @@ public class StelleDAO {
 		ArrayList<posContorno> posizioniContorno; 
 		stelle = LoadAllStelle();
 		posizioniContorno = posContornoById(IdFil);
+		if(posizioniContorno.size() == 0) {
+			return stelle;
+		}
 		stelleInFil = new ArrayList<Stella>();
 		for(int i = 0; i <= stelle.size() -1; i++) {
 			Stella stella = stelle.get(i);
@@ -177,7 +180,7 @@ public class StelleDAO {
 			e.printStackTrace();
 		}
 		try {
-			String sql = "SELECT * FROM Stella";
+			String sql = "SELECT * FROM \"Stella\"";
 			stmt = connection.prepareStatement(sql);
 			resultSet = stmt.executeQuery();
 			while(resultSet.next()) {
@@ -220,7 +223,7 @@ public class StelleDAO {
 				latitudine = resultSet.getDouble("Latitudine");
 				longitudine = resultSet.getDouble("Longitudine");
 				posizioneContorno = new posContorno(latitudine, longitudine, ID);
-				posizioniContorno.add(posizioneContorno);
+				posizioniContorno.add(posizioneContorno);	
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
