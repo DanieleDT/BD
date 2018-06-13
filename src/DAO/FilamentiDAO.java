@@ -76,7 +76,6 @@ public class FilamentiDAO {
 		Connection connection = null;
 		ResultSet resultSet = null;
 		PreparedStatement stmt = null;
-		int globalCount = 0;
 		int lastID = -1;
 		try {
 			connection = DriverManager.getConnection("jdbc:postgresql:ProgettoDB", "postgres", "postgres");
@@ -115,18 +114,15 @@ public class FilamentiDAO {
 		try {
 			while (resultSet.next()) {
 				if (lastID == -1) {
-					globalCount++;
 					lastID = resultSet.getInt("idfilamento");
 					idFil.add(lastID);
 				} else {
 					if (lastID != resultSet.getInt("idFilamento")) {
-						globalCount++;
 						lastID = resultSet.getInt("idFilamento");
 						idFil.add(lastID);
 					}
 				}
 			}
-			idFil.add(0, globalCount);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -489,10 +485,44 @@ public class FilamentiDAO {
 		return count;
 	}
 
+	public ArrayList<Filamento> loadFilamentiById(ArrayList<Integer> id) {
+		ArrayList<Filamento> filamenti = new ArrayList<Filamento>();
+		Connection conn = null;
+		ResultSet resultSet = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = DriverManager.getConnection("jdbc:postgresql:ProgettoDB", "postgres", "postgres");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			for (int i = 0; i < id.size(); i++) {
+				String sql = "SELECT * FROM filamento WHERE id = ?";
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, id.get(i));
+				resultSet = stmt.executeQuery();
+				resultSet.next();
+				String nome = resultSet.getString("nome");
+				double flusso = resultSet.getDouble("flussototale");
+				double contrasto = resultSet.getDouble("contrasto");
+				double densitamedia = resultSet.getDouble("densitamedia");
+				double ellitticita = resultSet.getDouble("ellitticita");
+				double temperatura = resultSet.getDouble("tempmedia");
+				String strumento = resultSet.getString("nomstrumento");
+				String satellite = resultSet.getString("nomsatellite");
+				Filamento filamento = new Filamento(id.get(i), densitamedia, temperatura, contrasto, nome, flusso, ellitticita, strumento, satellite);
+				filamenti.add(filamento);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return filamenti;
+	}
+
 	public static void main(String[] args) {
-		 FilamentiDAO dao = new FilamentiDAO(); 
-		 /* BeanFilamento bean, bean1;
-		 * System.out.println("start"); bean =
+		FilamentiDAO dao = new FilamentiDAO();
+		/*
+		 * BeanFilamento bean, bean1; System.out.println("start"); bean =
 		 * dao.InformazioniFilamentoDesignazione("SDC10.014-0.818"); bean1 =
 		 * dao.InformazioniFilamentoId(383); System.out.println("finish");
 		 * System.out.println(bean.getEstensioneLat());
@@ -506,37 +536,30 @@ public class FilamentiDAO {
 		 * System.out.println(bean1.getLonCentroide());
 		 * System.out.println(bean1.getNumSeg());
 		 */
-		 /*BeanFilamentiConEll bean;
-		 ArrayList<Filamento> fil; 
-		 System.out.println("start");
-		 bean = dao.SearchFilConEll(500, 2, 3);
-		 System.out.println("finish");
-		 fil = bean.getFilamenti();
-		 System.out.println(fil.size());
-		 for(int i = 0; i< fil.size(); i++) {
-			 System.out.println(fil.get(i).getID());
-		 }
+		/*
+		 * BeanFilamentiConEll bean; ArrayList<Filamento> fil;
+		 * System.out.println("start"); bean = dao.SearchFilConEll(500, 2, 3);
+		 * System.out.println("finish"); fil = bean.getFilamenti();
+		 * System.out.println(fil.size()); for(int i = 0; i< fil.size(); i++) {
+		 * System.out.println(fil.get(i).getID()); }
 		 */
-		 
-		 
-		 //  <<<<<<<<<N.B>>>>>>>>>.
-		 // posizione 0 #elementi trovati
-		 // posizione[1...N] id trovati
-		 
-		 /*ArrayList<Integer> id;
-		 System.out.println("start");
-		 id = dao.FilamentiNumSeg(1, 100000);
-		 System.out.println("finish");
-		 System.out.println(id.size());
-		 for (int i = 0; i < id.size(); i ++) {
-			 System.out.println(id.get(i));
-		 }*/
-		 ArrayList <Integer> id;
-		 System.out.println("start");
-		 id = dao.FilamentoRegioneCerchio(10,-1, 500000);
-		 System.out.println("finish");
-		 for (int i = 0; i< id.size(); i++) {
-			 System.out.println(id.get(i));
-		 }
+
+		// <<<<<<<<<N.B>>>>>>>>>.
+
+		// posizione[1...N] id trovati
+
+		/*
+		 * ArrayList<Integer> id; System.out.println("start"); id =
+		 * dao.FilamentiNumSeg(1, 100000); System.out.println("finish");
+		 * System.out.println(id.size()); for (int i = 0; i < id.size(); i ++) {
+		 * System.out.println(id.get(i)); }
+		 */
+		ArrayList<Integer> id;
+		System.out.println("start");
+		id = dao.FilamentoRegioneCerchio(10, -1, 500000);
+		System.out.println("finish");
+		for (int i = 0; i < id.size(); i++) {
+			System.out.println(id.get(i));
+		}
 	}
 }
