@@ -37,7 +37,7 @@ public class CsvManager {
 		if (type > 3|| type < 0 ) return false;
 		try {
 			bufferedReader = new BufferedReader(new FileReader(this.path));
-			String header = bufferedReader.readLine(); //salta header
+			bufferedReader.readLine(); //salta header
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -125,9 +125,7 @@ public class CsvManager {
 					}
 					//aggiungo il punto dello scheletro (se non esiste)
 					if(!(ScheletroDAO.existPuntoScheletro(lat, lon , conn))) {
-						System.out.println("prima inserimento");
-						ScheletroDAO.insertPuntoScheletro(lat, lon, flusso, numProg, id, conn);
-						System.out.println("dopo inserimento");
+						ScheletroDAO.insertPuntoScheletro(lon, lat, flusso, numProg, id, conn);
 					}
 				}
 			}

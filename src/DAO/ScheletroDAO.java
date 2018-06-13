@@ -150,12 +150,12 @@ public class ScheletroDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static boolean existPuntoScheletro(double lat, double lon, Connection conn) {
 		PreparedStatement stmt = null;
 		boolean result = false;
 		ResultSet resultSet = null;
-		//double latitudine, longitudine;
+		// double latitudine, longitudine;
 		try {
 			stmt = conn.prepareStatement("SELECT * FROM posscheletro WHERE latitudine = ? AND longitudine = ?");
 			stmt.setDouble(1, lat);
@@ -163,12 +163,7 @@ public class ScheletroDAO {
 			resultSet = stmt.executeQuery();
 
 			result = (resultSet.next());
-			System.out.println(result);
-			/*resultSet.next();
-			latitudine = resultSet.getDouble("latitudine");
-			longitudine = resultSet.getDouble("longitudine");
-			System.out.println(lat+ " " + lon + " " + latitudine + "" + longitudine);
-			*/
+
 			resultSet.close();
 			stmt.close();
 		} catch (Exception e) {
@@ -176,23 +171,35 @@ public class ScheletroDAO {
 		}
 		return result;
 	}
-	
-	public static void insertPuntoScheletro(double lon, double lat, double flusso, int numProg, int idScheletro, Connection conn) {
+
+	public static void insertPuntoScheletro(double lon, double lat, double flusso, int numProg, int idScheletro,
+			Connection conn) {
 		PreparedStatement stmt = null;
 		try {
-			stmt = conn.prepareStatement("INSERT INTO posscheletro(latitudine, longitudine, flusso, numeroprogressivo, idscheletro) VALUES (?,?,?,?,?);");
+			stmt = conn.prepareStatement(
+					"INSERT INTO posscheletro(latitudine, longitudine, flusso, numeroprogressivo, idscheletro) VALUES (?,?,?,?,?);");
 			stmt.setDouble(1, lat);
 			stmt.setDouble(2, lon);
 			stmt.setDouble(3, flusso);
 			stmt.setInt(4, numProg);
 			stmt.setInt(5, idScheletro);
-			
+
 			stmt.executeUpdate();
-			
+
 			stmt.close();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-}
+	}
 	
+	public static void main(String[] args) {
+		ArrayList<Double> dist;
+		ScheletroDAO dao = new ScheletroDAO();
+		System.out.println("start");
+		dist = dao.distanzaSegmentoContorno(3);
+		System.out.println("finish");
+		System.out.println(dist.get(0));
+		System.out.println(dist.get(1));
+	}
+
 }
