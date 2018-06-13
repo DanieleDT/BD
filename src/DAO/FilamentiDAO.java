@@ -434,7 +434,7 @@ public class FilamentiDAO {
 	public static void insertFilamento(int id, String nome, double flusso, double contrasto, double densita, double temperatura, double ellitticita, String strumento, String satellite,  Connection conn) {
 		PreparedStatement stmt = null;
 		try {
-			stmt = conn.prepareStatement("INSERT INTO filamento(id, nome, flussototale, contrasto, densitamedia, tempmedia, ellitticita, nomestrumento, nomesatellite) VALUES (?,?,?,?,?,?,?,?,?);");
+			stmt = conn.prepareStatement("INSERT INTO filamento(id, nome, flussototale, contrasto, densitamedia, tempmedia, ellitticita, nomstrumento, nomsatellite) VALUES (?,?,?,?,?,?,?,?,?);");
 			stmt.setInt(1, id);
 			stmt.setString(2, nome);
 			stmt.setDouble(3, flusso);

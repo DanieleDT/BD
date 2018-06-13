@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 
 import DAO.ContornoDAO;
 import DAO.FilamentiDAO;
+import DAO.ScheletroDAO;
 import DAO.StelleDAO;
 import DAO.StrumentoDAO;
 
@@ -28,7 +29,7 @@ public class CsvManager {
 		Connection conn=null;
 		BufferedReader bufferedReader = null;
 		try {
-			conn=DriverManager.getConnection("jdbc:postgresql:progettoDB","postgres","postgres");
+			conn=DriverManager.getConnection("jdbc:postgresql:ProgettoDB","postgres","postgres");
 			}
 		catch (Exception e) {
             e.printStackTrace();
@@ -46,9 +47,9 @@ public class CsvManager {
 			case 1:
 				insertFilamenti(bufferedReader, conn);
 			case 2:
-				//insertScheletro(bufferedReader, conn);
+				insertScheletro(bufferedReader, conn);
 			case 3:
-				//insertStelle(bufferedReader, conn);
+				insertStelle(bufferedReader, conn);
 		}
 		return true;
 	}
@@ -92,12 +93,13 @@ public class CsvManager {
 					}
 				}
 			}
-		} catch (IOException e) {
+			conn.close();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-/*	private void insertScheletro(BufferedReader bufRead, Connection conn) {
+
+	private void insertScheletro(BufferedReader bufRead, Connection conn) {
 		String line;
 		try {
 			while((line = bufRead.readLine())!= null) {
@@ -105,21 +107,28 @@ public class CsvManager {
 				int idFil = Integer.parseInt(linePart[0].trim());
 				int id = Integer.parseInt(linePart[1].trim());
 				String tipo = linePart[2].trim();
+				Boolean tipologia = false;
+				if(tipo.equals("S")) {
+					tipologia = true;
+				}
 				double lon = Double.parseDouble(linePart[3].trim());
 				double lat = Double.parseDouble(linePart[4].trim());
 				int numProg = Integer.parseInt(linePart[5].trim());
 				double flusso = Double.parseDouble(linePart[6].trim());
 				if(FilamentiDAO.existFilamento(idFil, conn)) {
-					if(!existScheletro(id, conn)){
-						insertScheltro(wwwwww);
+					//aggiungo lo scheletro (se non esiste)
+					if(!ScheletroDAO.existScheletro(id, conn)){
+						ScheletroDAO.insertScheletro(id, idFil, tipologia, conn);
+						System.out.println("scheletro inserito");
 					}else {
-						updateScheletro(wwww);
+						ScheletroDAO.updateScheletro(id, idFil, tipologia, conn);
 					}
-					if(existPuntoScheletro(lat, lon , wwww)) {
-						updatePuntoScheletro(wwww);
-					}else {
-						insertPuntoScheletro();
-					}//insert scheletro se non esiste
+					//aggiungo il punto dello scheletro (se non esiste)
+					if(!(ScheletroDAO.existPuntoScheletro(lat, lon , conn))) {
+						System.out.println("prima inserimento");
+						ScheletroDAO.insertPuntoScheletro(lat, lon, flusso, numProg, id, conn);
+						System.out.println("dopo inserimento");
+					}
 				}
 			}
 		} catch (IOException e) {
@@ -138,19 +147,23 @@ public class CsvManager {
 				double lat = Double.parseDouble(linePart[3].trim());
 				double flusso = Double.parseDouble(linePart[4].trim());
 				String tipologia = linePart[5].trim();
-				if(!StelleDAO.exist(ID, conn)) {
-					StelleDAO.insertStella(wwwww);
+				if(!StelleDAO.existStella(ID, conn)) {
+					StelleDAO.insertStella(ID, nome, lat, lon, flusso, tipologia, conn);
+					System.out.println("stella aggiunta");
 				}else {
-					StelleDAO.updateStella(wwwww);
+					StelleDAO.updateStella(ID, nome, lat, lon, flusso, tipologia, conn);
+					System.out.println("stella aggiornata");
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 	
 	public static void main(String[] args) {
-		CsvManager csv = new CsvManager("/home/...");
-		csv.uploadFile(1);
+		CsvManager csv = new CsvManager("/home/danieledt/Scaricati/ProgettoDb_TestDati/Esame Basi Dati/scheletro_filamenti_Spitzer.csv");
+		System.out.println("START");
+		csv.uploadFile(2);
+		System.out.println("END");
 	}
 }

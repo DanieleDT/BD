@@ -291,8 +291,70 @@ public class StelleDAO {
 		return result;
 	}
 	
-	public static void main(String[] args) {
-		StelleDAO dao = new StelleDAO();
-		dao.FindStelleInFilamento(5);
+	public static boolean existStella(int id, Connection conn) {
+		PreparedStatement stmt = null;
+		boolean result = false;
+		ResultSet resultSet = null;
+		try {
+			stmt = conn.prepareStatement("SELECT * FROM stella WHERE id = ?");
+			stmt.setInt(1, id);
+			resultSet = stmt.executeQuery();
+			
+			result = (resultSet.next());
+			
+			resultSet.close();
+			stmt.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
+	
+	public static void insertStella (int id, String nome, double latitudine, double longitudine, double flusso, String tipologia,  Connection conn) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("INSERT INTO stella(id, nome, latitudine, longitudine, valoreflusso, tipologia) VALUES (?,?,?,?,?,?);");
+			stmt.setInt(1, id);
+			stmt.setString(2, nome);
+			stmt.setDouble(3, latitudine);
+			stmt.setDouble(4, longitudine);
+			stmt.setDouble(5, flusso);
+			stmt.setString(6, tipologia);
+						
+			stmt.executeUpdate();
+			
+			stmt.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void updateStella (int id, String nome, double latitudine, double longitudine, double flusso, String tipologia,  Connection conn) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("UPDATE stella SET nome = ?, latitudine = ?, longitudine = ?, valoreflusso = ?, tipologia = ? WHERE id = ?");
+			stmt.setInt(6, id);
+			stmt.setString(1, nome);
+			stmt.setDouble(2, latitudine);
+			stmt.setDouble(3, longitudine);
+			stmt.setDouble(4, flusso);
+			stmt.setString(5, tipologia);
+						
+			stmt.executeUpdate();
+			
+			stmt.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		ArrayList<Stella> stelle;
+		Stella stella;
+		StelleDAO dao = new StelleDAO();
+		stelle = dao.LoadAllStelle();
+		System.out.println(stelle.size());
+		stella = stelle.get(0);
+		System.out.println(stella.getNome());
+		}
 }
