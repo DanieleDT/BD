@@ -119,7 +119,6 @@ public class CsvManager {
 					//aggiungo lo scheletro (se non esiste)
 					if(!ScheletroDAO.existScheletro(id, conn)){
 						ScheletroDAO.insertScheletro(id, idFil, tipologia, conn);
-						System.out.println("scheletro inserito");
 					}else {
 						ScheletroDAO.updateScheletro(id, idFil, tipologia, conn);
 					}
@@ -147,10 +146,8 @@ public class CsvManager {
 				String tipologia = linePart[5].trim();
 				if(!StelleDAO.existStella(ID, conn)) {
 					StelleDAO.insertStella(ID, nome, lat, lon, flusso, tipologia, conn);
-					System.out.println("stella aggiunta");
 				}else {
 					StelleDAO.updateStella(ID, nome, lat, lon, flusso, tipologia, conn);
-					System.out.println("stella aggiornata");
 				}
 			}
 		} catch (IOException e) {
