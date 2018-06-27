@@ -8,7 +8,7 @@ public class InitDatabase {
 		CsvManager csvManager;
 		path= new File("CsvFiles").getAbsolutePath();
 		
-		//caricamento filamenti
+		//caricamento filamenti	
 		System.out.println("inizio filamenti");
 		csvManager = new CsvManager(path + "/filamenti_Spitzer.csv");
 		csvManager.uploadFile(1);
