@@ -364,30 +364,4 @@ public class StelleDAO {
 		}
 	}
 
-	public static void main(String[] args) {
-		// ArrayList<Stella> stelle;
-		Stella stella;
-		StelleDAO dao = new StelleDAO();
-		/*
-		 * stelle = dao.FindStelleInFilamento(10600); System.out.println(stelle.size());
-		 * for (int i = 0; i < stelle.size(); i++) { stella = stelle.get(i);
-		 * System.out.println(stella.getNome()); }
-		 */
-		/*ArrayList<ArrayList<Stella>> stelle;
-		stelle = dao.StelleInFilRettangolo(1, 1, 10000000, 10000000);
-		System.out.println(stelle.get(0).size());
-		for (int j = 0; j <= 1; j++) {
-			for (int i = 0; i < stelle.get(j).size(); i++) {
-				stella = stelle.get(j).get(i);
-				System.out.println(stella.getNome());
-			}
-		}*/
-		System.out.println("start");
-		ArrayList<BeanStella> bean = dao.distanzaStelleSpinaDorsale(383);
-		System.out.println("finish");
-		for  (int i = 0; i<bean.size(); i++) {
-			System.out.println(bean.get(i).getNome());
-			System.out.println(bean.get(i).getDistanza());
-		}
-	}
 }

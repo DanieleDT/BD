@@ -10,6 +10,7 @@ import bean.BeanFilamentiConEll;
 import bean.BeanFilamento;
 import bean.Centroide;
 import bean.Estensione;
+import controller.ControllerStelle;
 import entity.Filamento;
 
 public class FilamentiDAO {
@@ -520,7 +521,6 @@ public class FilamentiDAO {
 	}
 
 	public static void main(String[] args) {
-		FilamentiDAO dao = new FilamentiDAO();
 		/*
 		 * BeanFilamento bean, bean1; System.out.println("start"); bean =
 		 * dao.InformazioniFilamentoDesignazione("SDC10.014-0.818"); bean1 =
@@ -554,12 +554,8 @@ public class FilamentiDAO {
 		 * System.out.println(id.size()); for (int i = 0; i < id.size(); i ++) {
 		 * System.out.println(id.get(i)); }
 		 */
-		ArrayList<Integer> id;
-		System.out.println("start");
-		id = dao.FilamentoRegioneCerchio(10, -1, 500000);
-		System.out.println("finish");
-		for (int i = 0; i < id.size(); i++) {
-			System.out.println(id.get(i));
-		}
+		ControllerStelle cont = new ControllerStelle();
+		cont.StelleInFilRettangolo(0,0, 100000, 1000000);
+		System.out.println("END");
 	}
 }

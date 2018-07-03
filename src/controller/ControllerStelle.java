@@ -62,4 +62,10 @@ public class ControllerStelle {
 		bean = dao.distanzaStelleSpinaDorsale(idFil);
 		return bean;
 	}
+	public static void main() {
+		ControllerStelle cont = new ControllerStelle();
+		cont.StelleInFilRettangolo(0,0, 100000, 1000000);
+		System.out.println("END");
+	}
+	
 }
