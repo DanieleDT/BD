@@ -10,6 +10,7 @@ import bean.BeanFilamentiConEll;
 import bean.BeanFilamento;
 import bean.Centroide;
 import bean.Estensione;
+import controller.ControllerFilamenti;
 import controller.ControllerStelle;
 import entity.Filamento;
 
@@ -210,7 +211,7 @@ public class FilamentiDAO {
 		}
 		return result;
 	}
-	
+
 	public static boolean existFilamentoNoConn(String nome) {
 		PreparedStatement stmt = null;
 		boolean result = false;
@@ -235,7 +236,7 @@ public class FilamentiDAO {
 		}
 		return result;
 	}
-	
+
 	public static boolean existFilamentoNoConn(int id) {
 		PreparedStatement stmt = null;
 		boolean result = false;
@@ -561,7 +562,8 @@ public class FilamentiDAO {
 				double temperatura = resultSet.getDouble("tempmedia");
 				String strumento = resultSet.getString("nomstrumento");
 				String satellite = resultSet.getString("nomsatellite");
-				Filamento filamento = new Filamento(id.get(i), densitamedia, temperatura, contrasto, nome, flusso, ellitticita, strumento, satellite);
+				Filamento filamento = new Filamento(id.get(i), densitamedia, temperatura, contrasto, nome, flusso,
+						ellitticita, strumento, satellite);
 				filamenti.add(filamento);
 			}
 		} catch (Exception e) {
@@ -586,13 +588,18 @@ public class FilamentiDAO {
 		 * System.out.println(bean1.getLonCentroide());
 		 * System.out.println(bean1.getNumSeg());
 		 */
-		/*
-		 * BeanFilamentiConEll bean; ArrayList<Filamento> fil;
-		 * System.out.println("start"); bean = dao.SearchFilConEll(500, 2, 3);
-		 * System.out.println("finish"); fil = bean.getFilamenti();
-		 * System.out.println(fil.size()); for(int i = 0; i< fil.size(); i++) {
-		 * System.out.println(fil.get(i).getID()); }
-		 */
+
+		BeanFilamentiConEll bean;
+		ArrayList<Filamento> fil;
+		System.out.println("start");
+		ControllerFilamenti con = new ControllerFilamenti();
+		bean = con.SearchFilamentoConEll(1,2,3);
+		System.out.println("finish");
+		fil = bean.getFilamenti();
+		System.out.println(fil.size());
+		/*for (int i = 0; i < fil.size(); i++) {
+			System.out.println(fil.get(i).getID());
+		}*/
 
 		// <<<<<<<<<N.B>>>>>>>>>.
 
@@ -604,8 +611,9 @@ public class FilamentiDAO {
 		 * System.out.println(id.size()); for (int i = 0; i < id.size(); i ++) {
 		 * System.out.println(id.get(i)); }
 		 */
-		ControllerStelle cont = new ControllerStelle();
-		cont.StelleInFilRettangolo(0,0, 100000, 1000000);
-		System.out.println("END");
+		/*
+		 * ControllerStelle cont = new ControllerStelle();
+		 * cont.StelleInFilRettangolo(0,0, 100000, 1000000); System.out.println("END");
+		 */
 	}
 }

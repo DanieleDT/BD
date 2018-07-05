@@ -23,7 +23,7 @@ public class ControllerFilamenti {
 	//RF 6
 	public BeanFilamentiConEll SearchFilamentoConEll(int brillanza, double eMin, double eMax) {
 		FilamentiDAO dao = new FilamentiDAO();
-		BeanFilamentiConEll bean = dao.SearchFilConEll(brillanza, eMax, eMin);
+		BeanFilamentiConEll bean = dao.SearchFilConEll(brillanza, eMin, eMax);
 		return bean;
 		
 	}
