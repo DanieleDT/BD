@@ -210,6 +210,56 @@ public class FilamentiDAO {
 		}
 		return result;
 	}
+	
+	public static boolean existFilamentoNoConn(String nome) {
+		PreparedStatement stmt = null;
+		boolean result = false;
+		ResultSet resultSet = null;
+		Connection connection = null;
+		try {
+			connection = DriverManager.getConnection("jdbc:postgresql:ProgettoDB", "postgres", "postgres");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			stmt = connection.prepareStatement("SELECT * FROM filamento WHERE nome = ?");
+			stmt.setString(1, nome);
+			resultSet = stmt.executeQuery();
+
+			result = (resultSet.next());
+
+			resultSet.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static boolean existFilamentoNoConn(int id) {
+		PreparedStatement stmt = null;
+		boolean result = false;
+		ResultSet resultSet = null;
+		Connection connection = null;
+		try {
+			connection = DriverManager.getConnection("jdbc:postgresql:ProgettoDB", "postgres", "postgres");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			stmt = connection.prepareStatement("SELECT * FROM filamento WHERE id = ?");
+			stmt.setInt(1, id);
+			resultSet = stmt.executeQuery();
+
+			result = (resultSet.next());
+
+			resultSet.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	public static void insertFilamento(int id, String nome, double flusso, double contrasto, double densita,
 			double temperatura, double ellitticita, String strumento, String satellite, Connection conn) {

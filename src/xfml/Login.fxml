@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="769.0" style="-fx-background-color: #5C6BC0;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.loginBoundary">
+   <children>
+      <AnchorPane layoutX="390.0" layoutY="18.0" prefHeight="367.0" prefWidth="364.0" style="-fx-background-color: #7986CB;">
+         <children>
+            <TextField fx:id="usernameText" focusTraversable="false" layoutX="82.0" layoutY="136.0" prefHeight="25.0" prefWidth="213.0" promptText="Username" style="-fx-background-radius: 0;" />
+            <PasswordField fx:id="passwordText" focusTraversable="false" layoutX="82.0" layoutY="206.0" onAction="#onEnter" prefHeight="26.0" prefWidth="213.0" promptText="Password" style="-fx-background-radius: 0;" />
+            <Button fx:id="loginButton" layoutX="167.0" layoutY="277.0" mnemonicParsing="false" onAction="#onLoginClick" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Login" textFill="WHITE" />
+            <Label layoutX="162.0" layoutY="68.0" text="Accedi" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label fx:id="errorLabel" layoutX="14.0" layoutY="336.0" textFill="#b90000">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="imageFilamento" fitHeight="304.0" fitWidth="354.0" layoutX="18.0" layoutY="73.0" pickOnBounds="true">
+         <image>
+            <Image url="@../resources/filamento.jpg" />
+         </image></ImageView>
+      <Label alignment="CENTER" layoutX="138.0" layoutY="18.0" text="Benvenuto" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+   </children>
+</AnchorPane>
