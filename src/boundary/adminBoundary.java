@@ -1,6 +1,8 @@
 package boundary;
 
+import java.io.File;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -16,6 +18,7 @@ import bean.BeanStelleInFilamento;
 import controller.ControllerFilamenti;
 import controller.ControllerScheletro;
 import controller.ControllerStelle;
+import csv.CsvManager;
 import entity.Filamento;
 import entity.Stella;
 import javafx.animation.KeyFrame;
@@ -27,6 +30,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
@@ -44,21 +48,54 @@ public class adminBoundary implements Initializable {
 
 	@FXML
 	private ToggleGroup tipoFile;
+	
+	@FXML
+	private Label labelSuccessSatellite;
+
+	@FXML
+	private DatePicker dataInizioMissione, dataFineMissione;
+
+	@FXML
+	private RadioButton fileFilamenti;
+
+	@FXML
+	private RadioButton fileContorni;
+
+	@FXML
+	private RadioButton fileSegmenti;
+
+	@FXML
+	private RadioButton fileStelle;
+
+	@FXML
+	private Label errorLabelImport;
+
+	@FXML
+	private TextField filePathImport;
 
 	@FXML
 	private Label errorLabelStrumento;
-	
+
+	@FXML
+	private Label labelSuccessStrumento;
+
 	@FXML
 	private TextField nomeStrumento;
-	
+
 	@FXML
 	private TextField nomeSatelliteAppartenenza;
-	
+
+	@FXML
+	private Label errrorLabelAddFilamento;
+
 	@FXML
 	private TextField bandeStrumento;
-	
+
 	@FXML
 	private Label successRegister;
+
+	@FXML
+	private TextField agenziaText;
 
 	@FXML
 	private TextField usernameRegister;
@@ -101,6 +138,9 @@ public class adminBoundary implements Initializable {
 
 	@FXML
 	private TextField idFilSpinaText;
+
+	@FXML
+	private Label successLabelImport;
 
 	@FXML
 	private TextField idSegDistText;
@@ -212,6 +252,9 @@ public class adminBoundary implements Initializable {
 
 	@FXML
 	private TextField brillanzaText;
+
+	@FXML
+	private TextField nomeSatellite;
 
 	@FXML
 	private TextField ellitticitaMinText;
@@ -849,14 +892,15 @@ public class adminBoundary implements Initializable {
 				pageCountStelleSpina.setText("" + (num + 1));
 				final ObservableList<BeanStella> observable = loadTwentyItems(num + 1);
 				tableStelleSpina.setItems(observable);
-				}
+			}
 		}
 	}
 
 	@FXML // Aggiungi un utente
 	public void onRegisterClick(ActionEvent event) {
 		String username = usernameRegister.getText();
-		if (nomeRegister.getText().equals("")|| cognomeRegister.getText().equals("") || emailRegister.getText().equals("")) {
+		if (nomeRegister.getText().equals("") || cognomeRegister.getText().equals("")
+				|| emailRegister.getText().equals("")) {
 			// almeno un parametro vuoto
 			errorLabelRegister.setText("Input non valido");
 			Timeline fiveSecondsWonder = new Timeline(
@@ -917,7 +961,8 @@ public class adminBoundary implements Initializable {
 		} else {
 			// aggiungo
 			Boolean tipo = adminRegister.isSelected();
-			UtenteDAO.insertUtente(username, nomeRegister.getText(), cognomeRegister.getText(), passwordRegister.getText(), emailRegister.getText(), tipo);
+			UtenteDAO.insertUtente(username, nomeRegister.getText(), cognomeRegister.getText(),
+					passwordRegister.getText(), emailRegister.getText(), tipo);
 			successRegister.setText("Utente aggiunto con successo");
 			Timeline fiveSecondsWonder = new Timeline(
 					new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
@@ -934,14 +979,15 @@ public class adminBoundary implements Initializable {
 			emailRegister.setText("");
 			passwordRegister.setText("");
 			passwordConfirmRegister.setText("");
-			
+
 		}
 	}
-	
-	@FXML //Aggiungi uno strumento
+
+	@FXML // Aggiungi uno strumento
 	public void onStrumentoAdd(ActionEvent event) {
-		if(nomeStrumento.getText().equals("") || nomeSatelliteAppartenenza.getText().equals("") || bandeStrumento.getText().equals("")) {
-			//input non valido
+		if (nomeStrumento.getText().equals("") || nomeSatelliteAppartenenza.getText().equals("")
+				|| bandeStrumento.getText().equals("")) {
+			// input non valido
 			errorLabelStrumento.setText("Input non valido");
 			Timeline fiveSecondsWonder = new Timeline(
 					new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
@@ -955,8 +1001,8 @@ public class adminBoundary implements Initializable {
 			nomeStrumento.setText("");
 			nomeSatelliteAppartenenza.setText("");
 			bandeStrumento.setText("");
-		}else if(StrumentoDAO.existStrumento(nomeStrumento.getText(), nomeSatelliteAppartenenza.getText())) {
-			//Strumento già esistente
+		} else if (StrumentoDAO.existStrumento(nomeStrumento.getText(), nomeSatelliteAppartenenza.getText())) {
+			// Strumento già esistente
 			errorLabelStrumento.setText("Strumento già esistente");
 			Timeline fiveSecondsWonder = new Timeline(
 					new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
@@ -970,7 +1016,7 @@ public class adminBoundary implements Initializable {
 			nomeStrumento.setText("");
 			nomeSatelliteAppartenenza.setText("");
 			bandeStrumento.setText("");
-		}else if(!SatelliteDAO.existSatellite(nomeSatelliteAppartenenza.getText())){
+		} else if (!SatelliteDAO.existSatellite(nomeSatelliteAppartenenza.getText())) {
 			errorLabelStrumento.setText("Satellite non esistente");
 			Timeline fiveSecondsWonder = new Timeline(
 					new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
@@ -984,25 +1030,39 @@ public class adminBoundary implements Initializable {
 			nomeStrumento.setText("");
 			nomeSatelliteAppartenenza.setText("");
 			bandeStrumento.setText("");
-		}else {
+		} else {
 			String[] linePart = bandeStrumento.getText().split(" ");
 			ArrayList<Double> bande = new ArrayList<>();
 			Boolean parse = true;
-			for(int i = 0; i < linePart.length; i++) {
+			for (int i = 0; i < linePart.length; i++) {
 				Double banda = parseDouble(linePart[i].trim());
-				if(banda == Double.MIN_VALUE) {
+				if (banda == Double.MIN_VALUE) {
 					parse = false;
 					break;
 				}
 				bande.add(banda);
 			}
-			if(parse) {
-				//aggiungo
-				System.out.println("SUCCESS");
-				for(int i = 0; i< bande.size(); i++) {
-					System.out.println("" + bande.get(i));
+			if (parse) {
+				// aggiungo
+				StrumentoDAO.insertStrumento(nomeStrumento.getText(), nomeSatelliteAppartenenza.getText());
+				for (int i = 0; i < bande.size(); i++) {
+					StrumentoDAO.insertBanda(bande.get(i), nomeStrumento.getText(),
+							nomeSatelliteAppartenenza.getText());
 				}
-			}else {
+				labelSuccessStrumento.setText("Strumento aggiunto con successo");
+				Timeline fiveSecondsWonder = new Timeline(
+						new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
+							@Override
+							public void handle(ActionEvent event) {
+								labelSuccessStrumento.setText("");
+							}
+						}));
+				fiveSecondsWonder.setCycleCount(1);
+				fiveSecondsWonder.play();
+				nomeStrumento.setText("");
+				nomeSatelliteAppartenenza.setText("");
+				bandeStrumento.setText("");
+			} else {
 				errorLabelStrumento.setText("Bande non valide");
 				Timeline fiveSecondsWonder = new Timeline(
 						new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
@@ -1015,6 +1075,142 @@ public class adminBoundary implements Initializable {
 				fiveSecondsWonder.play();
 				bandeStrumento.setText("");
 			}
+		}
+	}
+
+	public void onFileImport(ActionEvent event) {
+		String path = filePathImport.getText();
+		File f = new File(path);
+		if (!f.exists() || f.isDirectory()) {
+			errorLabelImport.setText("File non valido");
+			Timeline fiveSecondsWonder = new Timeline(
+					new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
+						@Override
+						public void handle(ActionEvent event) {
+							errorLabelImport.setText("");
+						}
+					}));
+			fiveSecondsWonder.setCycleCount(1);
+			fiveSecondsWonder.play();
+		} else {
+			int type = -1;
+			if (fileContorni.isSelected()) {
+				type = 0;
+			} else if (fileFilamenti.isSelected()) {
+				type = 1;
+			} else if (fileSegmenti.isSelected()) {
+				type = 2;
+			} else if (fileStelle.isSelected()) {
+				type = 3;
+			}
+			CsvManager manager = new CsvManager(path);
+			manager.uploadFile(type);
+			successLabelImport.setText("File importato con successo");
+			Timeline fiveSecondsWonder = new Timeline(
+					new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
+						@Override
+						public void handle(ActionEvent event) {
+							successLabelImport.setText("");
+						}
+					}));
+			fiveSecondsWonder.setCycleCount(1);
+			fiveSecondsWonder.play();
+			filePathImport.setText("");
+		}
+	}
+
+	@FXML
+	public void onSatelliteAdd(ActionEvent event) {
+		if (nomeSatellite.getText().equals("") || agenziaText.getText().equals("")) {
+			// input non valido
+			errrorLabelAddFilamento.setText("Input non valido");
+			Timeline fiveSecondsWonder = new Timeline(
+					new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
+						@Override
+						public void handle(ActionEvent event) {
+							errrorLabelAddFilamento.setText("");
+						}
+					}));
+			fiveSecondsWonder.setCycleCount(1);
+			fiveSecondsWonder.play();
+
+		} else if (SatelliteDAO.existSatellite(nomeSatellite.getText())) {
+			// filamento già esistente
+			errrorLabelAddFilamento.setText("Satellite già esistente");
+			Timeline fiveSecondsWonder = new Timeline(
+					new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
+						@Override
+						public void handle(ActionEvent event) {
+							errrorLabelAddFilamento.setText("");
+						}
+					}));
+			fiveSecondsWonder.setCycleCount(1);
+			fiveSecondsWonder.play();
+			nomeSatellite.setText("");
+		} else if (dataInizioMissione.getValue() == null) {
+			// data inizio missione null
+			errrorLabelAddFilamento.setText("Data inizio missione mancante");
+			Timeline fiveSecondsWonder = new Timeline(
+					new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
+						@Override
+						public void handle(ActionEvent event) {
+							errrorLabelAddFilamento.setText("");
+						}
+					}));
+			fiveSecondsWonder.setCycleCount(1);
+			fiveSecondsWonder.play();
+		} else if (dataFineMissione.getValue() != null) {
+			if (dataFineMissione.getValue().compareTo(dataInizioMissione.getValue()) < 0) {
+				// data inizio precendente data fine
+				System.out.println("fine precedente inizio");
+				errrorLabelAddFilamento.setText("Fine missione antecedente all'inizio");
+				Timeline fiveSecondsWonder = new Timeline(
+						new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
+							@Override
+							public void handle(ActionEvent event) {
+								errrorLabelAddFilamento.setText("");
+							}
+						}));
+				fiveSecondsWonder.setCycleCount(1);
+				fiveSecondsWonder.play();
+			} else {
+				// aggiungo con data fine
+				SatelliteDAO.insertFilamento(nomeSatellite.getText(), agenziaText.getText(),
+						dataInizioMissione.getValue(), dataFineMissione.getValue());
+				dataInizioMissione.setValue(null);
+				dataFineMissione.setValue(null);
+				nomeSatellite.setText("");
+				agenziaText.setText("");
+				labelSuccessSatellite.setText("Satellite aggiunto con successo");
+				Timeline fiveSecondsWonder = new Timeline(
+						new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
+							@Override
+							public void handle(ActionEvent event) {
+								labelSuccessSatellite.setText("");
+							}
+						}));
+				fiveSecondsWonder.setCycleCount(1);
+				fiveSecondsWonder.play();
+
+			}
+		} else {
+			// aggiungo senza data fine
+			SatelliteDAO.insertFilamento(nomeSatellite.getText(), agenziaText.getText(), dataInizioMissione.getValue(),
+					dataFineMissione.getValue());
+			dataInizioMissione.setValue(null);
+			dataFineMissione.setValue(null);
+			nomeSatellite.setText("");
+			agenziaText.setText("");
+			labelSuccessSatellite.setText("Satellite aggiunto con successo");
+			Timeline fiveSecondsWonder = new Timeline(
+					new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
+						@Override
+						public void handle(ActionEvent event) {
+							labelSuccessSatellite.setText("");
+						}
+					}));
+			fiveSecondsWonder.setCycleCount(1);
+			fiveSecondsWonder.play();
 		}
 	}
 

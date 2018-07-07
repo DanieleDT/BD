@@ -49,6 +49,11 @@
 								<TextField fx:id="bandeStrumento" layoutX="309.0" layoutY="218.0" prefHeight="25.0" prefWidth="253.0" promptText="Bande (separate da uno spazio)" style="-fx-background-radius: 0;" />
 								<Button layoutX="396.0" layoutY="289.0" mnemonicParsing="false" onAction="#onStrumentoAdd" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Aggiungi" textFill="WHITE" />
                         <Label fx:id="errorLabelStrumento" layoutX="309.0" layoutY="263.0" prefHeight="16.0" prefWidth="256.0" textFill="#b90000" />
+                        <Label fx:id="labelSuccessStrumento" layoutX="309.0" layoutY="358.0" prefHeight="19.0" prefWidth="300.0" textFill="#74f545">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
 							</children>
 						</AnchorPane>
 					</content>
@@ -59,11 +64,13 @@
 					<content>
 						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 							<children>
-								<TextField layoutX="315.0" layoutY="109.0" prefHeight="25.0" prefWidth="253.0" promptText="Nome del satellite" style="-fx-background-radius: 0;" />
-								<DatePicker layoutX="355.0" layoutY="186.0" promptText="Data inizio missione" style="-fx-background-radius: 0;" />
-								<DatePicker layoutX="355.0" layoutY="258.0" promptText="Data fine missione" style="-fx-background-radius: 0;" />
-								<TextField layoutX="315.0" layoutY="335.0" prefHeight="25.0" prefWidth="253.0" promptText="Agenzie " style="-fx-background-radius: 0;" />
-								<Button layoutX="402.0" layoutY="407.0" mnemonicParsing="false" onAction="#onNumSegSearch" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Aggiungi" textFill="WHITE" />
+								<TextField fx:id="nomeSatellite" layoutX="316.0" layoutY="118.0" prefHeight="25.0" prefWidth="253.0" promptText="Nome del satellite" style="-fx-background-radius: 0;" />
+								<DatePicker fx:id="dataInizioMissione" editable="false" layoutX="342.0" layoutY="190.0" promptText="Data inizio missione" style="-fx-background-radius: 0;" />
+								<DatePicker fx:id="dataFineMissione" editable="false" layoutX="342.0" layoutY="258.0" promptText="Data fine missione" style="-fx-background-radius: 0;" />
+								<TextField fx:id="agenziaText" layoutX="315.0" layoutY="332.0" prefHeight="25.0" prefWidth="253.0" promptText="Agenzia" style="-fx-background-radius: 0;" />
+								<Button layoutX="402.0" layoutY="404.0" mnemonicParsing="false" onAction="#onSatelliteAdd" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Aggiungi" textFill="WHITE" />
+                        <Label fx:id="errrorLabelAddFilamento" layoutX="316.0" layoutY="372.0" prefHeight="16.0" prefWidth="263.0" textFill="#b90000" />
+                        <Label fx:id="labelSuccessSatellite" layoutX="339.0" layoutY="467.0" text="Satellite aggiunto con successo" textFill="#74f545" />
 							</children>
 						</AnchorPane>
 					</content>
@@ -75,17 +82,23 @@
 					<content>
 						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="671.0" prefWidth="906.0">
 							<children>
-								<RadioButton layoutX="347.0" layoutY="192.0" mnemonicParsing="false" text="Contorni di filamenti" textFill="WHITE">
+								<RadioButton fx:id="fileContorni" layoutX="347.0" layoutY="192.0" mnemonicParsing="false" text="Contorni di filamenti" textFill="WHITE">
 									<toggleGroup>
 										<ToggleGroup fx:id="tipoFile" />
 									</toggleGroup>
 								</RadioButton>
-								<RadioButton layoutX="347.0" layoutY="152.0" mnemonicParsing="false" selected="true" text="Filamenti" textFill="WHITE" toggleGroup="$tipoFile" />
-								<RadioButton layoutX="347.0" layoutY="273.0" mnemonicParsing="false" text="Stelle" textFill="WHITE" toggleGroup="$tipoFile" />
-								<RadioButton layoutX="347.0" layoutY="234.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="152.0" text="Segmenti di filamenti" textFill="WHITE" toggleGroup="$tipoFile" />
-								<TextField layoutX="251.0" layoutY="72.0" prefHeight="25.0" prefWidth="382.0" promptText="Indirizzo del file" style="-fx-background-radius: 0;" />
+								<RadioButton fx:id="fileFilamenti" layoutX="347.0" layoutY="152.0" mnemonicParsing="false" selected="true" text="Filamenti" textFill="WHITE" toggleGroup="$tipoFile" />
+								<RadioButton fx:id="fileStelle" layoutX="347.0" layoutY="273.0" mnemonicParsing="false" text="Stelle" textFill="WHITE" toggleGroup="$tipoFile" />
+								<RadioButton fx:id="fileSegmenti" layoutX="347.0" layoutY="234.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="152.0" text="Segmenti di filamenti" textFill="WHITE" toggleGroup="$tipoFile" />
+								<TextField fx:id="filePathImport" layoutX="251.0" layoutY="72.0" prefHeight="25.0" prefWidth="382.0" promptText="Indirizzo del file" style="-fx-background-radius: 0;" />
 								<Label layoutX="377.0" layoutY="119.0" text="Scegli tipo di file:" textFill="WHITE" />
-								<Button layoutX="383.0" layoutY="344.0" mnemonicParsing="false" onAction="#onNumSegSearch" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Importa" textFill="WHITE" />
+								<Button layoutX="383.0" layoutY="344.0" mnemonicParsing="false" onAction="#onFileImport" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Importa" textFill="WHITE" />
+                        <Label fx:id="errorLabelImport" layoutX="251.0" layoutY="98.0" prefHeight="16.0" prefWidth="389.0" textFill="#b90000" />
+                        <Label fx:id="successLabelImport" layoutX="321.0" layoutY="405.0" prefHeight="19.0" prefWidth="295.0" textFill="#74f545">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
 							</children>
 						</AnchorPane>
 					</content>

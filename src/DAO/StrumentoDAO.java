@@ -52,4 +52,41 @@ public class StrumentoDAO {
 		}
 		return result;
 	}
+	
+	public static void insertBanda(double banda, String nomeStrumento, String nomeSatellite) {
+		PreparedStatement stmt = null;
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:postgresql:ProgettoDB", "postgres", "postgres");
+			stmt = connection.prepareStatement(
+					"INSERT INTO banda(valore, nomestrumento, nomesatellite) VALUES (?,?,?);");
+			stmt.setDouble(1, banda);
+			stmt.setString(2, nomeStrumento);
+			stmt.setString(3, nomeSatellite);
+
+			stmt.executeUpdate();
+			
+			stmt.close();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void insertStrumento(String nomeStrumento, String nomeSatellite) {
+		PreparedStatement stmt = null;
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:postgresql:ProgettoDB", "postgres", "postgres");
+			stmt = connection.prepareStatement(
+					"INSERT INTO strumento(nome, satellite) VALUES (?,?);");
+			stmt.setString(1, nomeStrumento);
+			stmt.setString(2, nomeSatellite);
+
+			stmt.executeUpdate();
+			
+			stmt.close();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
