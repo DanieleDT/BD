@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entity.posContorno;
@@ -18,7 +19,7 @@ public class ScheletroDAO {
 		ArrayList<posContorno> contorno;
 		double distanza = 0;
 		double distMin = Integer.MAX_VALUE;
-		double distMax = Integer.MAX_VALUE;
+		double distMax = Integer.MIN_VALUE;
 		posScheletro min = null;
 		posScheletro max = null;
 		int idFil = -1;
@@ -81,22 +82,30 @@ public class ScheletroDAO {
 		}
 		// distanze euclidee per il massimo
 		for (int i = 0; i <= contorno.size() - 1; i++) {
-			distanza = Math.sqrt(Math.pow((max.getLatitudine() - contorno.get(i).getLatitudine()), 2.0)
-					+ Math.pow((max.getLongitudine() - contorno.get(i).getLongitudine()), 2.0));
+			distanza = Math.abs(Math.sqrt(Math.pow((max.getLatitudine() - contorno.get(i).getLatitudine()), 2.0)
+					+ Math.pow((max.getLongitudine() - contorno.get(i).getLongitudine()), 2.0)));
 			if (distanza < distMax) {
 				distMax = distanza;
 			}
 		}
 		// distanze euclidee per il minimo
 		for (int i = 0; i <= contorno.size() - 1; i++) {
-			distanza = Math.sqrt(Math.pow((min.getLatitudine() - contorno.get(i).getLatitudine()), 2.0)
-					+ Math.pow((min.getLongitudine() - contorno.get(i).getLongitudine()), 2.0));
+			distanza = Math.abs(Math.sqrt(Math.pow((min.getLatitudine() - contorno.get(i).getLatitudine()), 2.0)
+					+ Math.pow((min.getLongitudine() - contorno.get(i).getLongitudine()), 2.0)));
 			if (distanza < distMin) {
 				distMin = distanza;
 			}
 		}
 		distanze.add(distMin);
 		distanze.add(distMax);
+		try {
+			stmt.close();
+			resultSet.close();
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return distanze;
 	}
 
@@ -113,6 +122,28 @@ public class ScheletroDAO {
 
 			resultSet.close();
 			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static boolean existScheletro(int id) {
+		PreparedStatement stmt = null;
+		boolean result = false;
+		ResultSet resultSet = null;
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection("jdbc:postgresql:ProgettoDB", "postgres", "postgres");
+			stmt = conn.prepareStatement("SELECT * FROM scheletro WHERE id = ?");
+			stmt.setInt(1, id);
+			resultSet = stmt.executeQuery();
+
+			result = (resultSet.next());
+
+			resultSet.close();
+			stmt.close();
+			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -191,15 +222,4 @@ public class ScheletroDAO {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void main(String[] args) {
-		ArrayList<Double> dist;
-		ScheletroDAO dao = new ScheletroDAO();
-		System.out.println("start");
-		dist = dao.distanzaSegmentoContorno(3);
-		System.out.println("finish");
-		System.out.println(dist.get(0));
-		System.out.println(dist.get(1));
-	}
-
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import bean.BeanStella;
@@ -165,6 +166,14 @@ public class StelleDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		try {
+			stmt.close();
+			resultSet.close();
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return stelle;
 	}
 
@@ -193,6 +202,14 @@ public class StelleDAO {
 				filamenti.add(resultSet.getInt("idFil"));
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			stmt.close();
+			resultSet.close();
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return filamenti;
@@ -232,6 +249,14 @@ public class StelleDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		try {
+			stmt.close();
+			resultSet.close();
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return stelle;
 	}
 
@@ -260,6 +285,14 @@ public class StelleDAO {
 				posizioniContorno.add(posizioneContorno);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			stmt.close();
+			resultSet.close();
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return posizioniContorno;
@@ -298,6 +331,14 @@ public class StelleDAO {
 				result.add(posScheletro);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			stmt.close();
+			resultSet.close();
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;

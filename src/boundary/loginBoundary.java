@@ -74,7 +74,7 @@ public class loginBoundary {
 				Scene scene = new Scene(mainPane);
 				scene.getStylesheets().add(css);
 				stage.setScene(scene);
-				stage.setTitle("User Page");
+				stage.setTitle("Admin Page");
 				stage.setResizable(false);
 				stage.show();
 			} else {

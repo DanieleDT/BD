@@ -17,12 +17,12 @@ public class ControllerStelle {
 		int countPrestelle = 0;
 		int countUnbound = 0;
 		for (int i = 0; i < stelle.size(); i++) {
-			if (stelle.get(i).getTipologia() == "UNBOUND") {
+			if (stelle.get(i).getTipologia().equals("UNBOUND")) {
 				countUnbound++;
-			} else if (stelle.get(i).getTipologia() == "PRESTELLAR") {
+			} else if (stelle.get(i).getTipologia().equals("PRESTELLAR")) {
 				countPrestelle++;
 			} else {
-				countUnbound++;
+				countProtostelle++;
 			}
 		}
 		BeanStelleInFilamento bean = new BeanStelleInFilamento(stelle, countProtostelle, countPrestelle, countUnbound);
@@ -41,9 +41,9 @@ public class ControllerStelle {
 			int countPrestelle = 0;
 			int countUnbound = 0;
 			for (int j = 0; j < stelle.get(i).size(); j++) {
-				if (stelle.get(i).get(j).getTipologia() == "UNBOUND") {
+				if (stelle.get(i).get(j).getTipologia().equals("UNBOUND")) {
 					countUnbound++;
-				}else if( stelle.get(i).get(j).getTipologia() == "PROTOSTELLAR") {
+				}else if( stelle.get(i).get(j).getTipologia().equals("PROTOSTELLAR")) {
 					countProtostelle++;
 				}else {
 					countPrestelle++;

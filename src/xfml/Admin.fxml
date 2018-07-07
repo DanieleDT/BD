@@ -6,79 +6,92 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="867.0" style="-fx-background-color: #5C6BC0;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.userBoundary">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="867.0" style="-fx-background-color: #5C6BC0;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.adminBoundary">
 	<children>
-		<TabPane layoutX="-1.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="748.0" prefWidth="883.0" style="-fx-background-color: #7986CB;" tabClosingPolicy="UNAVAILABLE">
+		<TabPane layoutX="-1.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="748.0" prefWidth="867.0" style="-fx-background-color: #7986CB;" tabClosingPolicy="UNAVAILABLE">
 			<tabs>
-            <Tab text="Aggiungi uno strumento">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TextField layoutX="309.0" layoutY="153.0" prefHeight="25.0" prefWidth="253.0" promptText="Nome del satellite di appartenenza" style="-fx-background-radius: 0;" />
-                        <TextField layoutX="309.0" layoutY="91.0" prefHeight="25.0" prefWidth="253.0" promptText="Nome dello strumento" style="-fx-background-radius: 0;" />
-                        <TextField layoutX="309.0" layoutY="218.0" prefHeight="25.0" prefWidth="253.0" promptText="Bande (separate da uno spazio)" style="-fx-background-radius: 0;" />
-                        <Button layoutX="396.0" layoutY="289.0" mnemonicParsing="false" onAction="#onNumSegSearch" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Aggiungi" textFill="WHITE" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab closable="false" text="Aggiungi un satellite">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TextField layoutX="315.0" layoutY="109.0" prefHeight="25.0" prefWidth="253.0" promptText="Nome del satellite" style="-fx-background-radius: 0;" />
-                        <DatePicker layoutX="355.0" layoutY="186.0" promptText="Data inizio missione" style="-fx-background-radius: 0;" />
-                        <DatePicker layoutX="355.0" layoutY="258.0" promptText="Data fine missione" style="-fx-background-radius: 0;" />
-                        <TextField layoutX="315.0" layoutY="335.0" prefHeight="25.0" prefWidth="253.0" promptText="Agenzie " style="-fx-background-radius: 0;" />
-                        <Button layoutX="402.0" layoutY="407.0" mnemonicParsing="false" onAction="#onNumSegSearch" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Aggiungi" textFill="WHITE" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-				<Tab closable="false" text="Importa un nuovo file">
+				<Tab text="Registra un utente" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
 					<content>
-						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="671.0" prefWidth="906.0">
-                     <children>
-                        <RadioButton layoutX="347.0" layoutY="192.0" mnemonicParsing="false" text="Contorni di filamenti" textFill="WHITE">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="tipoFile" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton layoutX="347.0" layoutY="152.0" mnemonicParsing="false" selected="true" text="Filamenti" textFill="WHITE" toggleGroup="$tipoFile" />
-                        <RadioButton layoutX="347.0" layoutY="273.0" mnemonicParsing="false" text="Stelle" textFill="WHITE" toggleGroup="$tipoFile" />
-                        <RadioButton layoutX="347.0" layoutY="234.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="152.0" text="Segmenti di filamenti" textFill="WHITE" toggleGroup="$tipoFile" />
-                        <TextField layoutX="251.0" layoutY="72.0" prefHeight="25.0" prefWidth="382.0" promptText="Indirizzo del file" style="-fx-background-radius: 0;" />
-                        <Label layoutX="377.0" layoutY="119.0" text="Scegli tipo di file:" textFill="WHITE" />
-                        <Button layoutX="383.0" layoutY="344.0" mnemonicParsing="false" onAction="#onNumSegSearch" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Importa" textFill="WHITE" />
-                     </children></AnchorPane>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<TextField fx:id="nomeRegister" layoutX="315.0" layoutY="103.0" prefHeight="25.0" prefWidth="253.0" promptText="Nome" style="-fx-background-radius: 0;" />
+								<TextField fx:id="cognomeRegister" layoutX="315.0" layoutY="164.0" prefHeight="25.0" prefWidth="253.0" promptText="Cognome" style="-fx-background-radius: 0;" />
+								<TextField fx:id="usernameRegister" layoutX="315.0" layoutY="229.0" prefHeight="25.0" prefWidth="253.0" promptText="Username" style="-fx-background-radius: 0;" />
+								<TextField fx:id="emailRegister" layoutX="315.0" layoutY="294.0" prefHeight="25.0" prefWidth="253.0" promptText="e-mail" style="-fx-background-radius: 0;" />
+								<CheckBox fx:id="adminRegister" layoutX="390.0" layoutY="351.0" mnemonicParsing="false" text="Amministratore" textFill="WHITE" />
+								<PasswordField fx:id="passwordRegister" layoutX="315.0" layoutY="392.0" prefHeight="25.0" prefWidth="253.0" promptText="Password" style="-fx-background-radius: 0;" />
+								<PasswordField fx:id="passwordConfirmRegister" layoutX="315.0" layoutY="442.0" prefHeight="25.0" prefWidth="253.0" promptText="Ripeti la password" style="-fx-background-radius: 0;" />
+								<Button layoutX="402.0" layoutY="500.0" mnemonicParsing="false" onAction="#onRegisterClick" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Aggiungi" textFill="WHITE" />
+                        <Label fx:id="errorLabelRegister" layoutX="315.0" layoutY="544.0" prefHeight="16.0" prefWidth="308.0" textFill="#b90000" />
+                        <Label fx:id="successRegister" layoutX="323.0" layoutY="551.0" prefHeight="18.0" prefWidth="349.0" textFill="#74f545">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+							</children>
+						</AnchorPane>
 					</content>
 				</Tab>
-            <Tab text="Registra un utente">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TextField layoutX="315.0" layoutY="103.0" prefHeight="25.0" prefWidth="253.0" promptText="Nome" style="-fx-background-radius: 0;" />
-                        <TextField layoutX="315.0" layoutY="164.0" prefHeight="25.0" prefWidth="253.0" promptText="Cognome" style="-fx-background-radius: 0;" />
-                        <TextField layoutX="315.0" layoutY="229.0" prefHeight="25.0" prefWidth="253.0" promptText="Username" style="-fx-background-radius: 0;" />
-                        <TextField layoutX="315.0" layoutY="294.0" prefHeight="25.0" prefWidth="253.0" promptText="e-mail" style="-fx-background-radius: 0;" />
-                        <CheckBox layoutX="390.0" layoutY="351.0" mnemonicParsing="false" text="Amministratore" textFill="WHITE" />
-                        <PasswordField layoutX="315.0" layoutY="392.0" prefHeight="25.0" prefWidth="253.0" promptText="Password" style="-fx-background-radius: 0;" />
-                        <PasswordField layoutX="315.0" layoutY="442.0" prefHeight="25.0" prefWidth="253.0" promptText="Ripeti la password" style="-fx-background-radius: 0;" />
-                        <Button layoutX="402.0" layoutY="500.0" mnemonicParsing="false" onAction="#onNumSegSearch" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Aggiungi" textFill="WHITE" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
+				<Tab text="Aggiungi uno strumento" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<TextField fx:id="nomeSatelliteAppartenenza" layoutX="309.0" layoutY="153.0" prefHeight="25.0" prefWidth="253.0" promptText="Nome del satellite di appartenenza" style="-fx-background-radius: 0;" />
+								<TextField fx:id="nomeStrumento" layoutX="309.0" layoutY="91.0" prefHeight="25.0" prefWidth="253.0" promptText="Nome dello strumento" style="-fx-background-radius: 0;" />
+								<TextField fx:id="bandeStrumento" layoutX="309.0" layoutY="218.0" prefHeight="25.0" prefWidth="253.0" promptText="Bande (separate da uno spazio)" style="-fx-background-radius: 0;" />
+								<Button layoutX="396.0" layoutY="289.0" mnemonicParsing="false" onAction="#onStrumentoAdd" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Aggiungi" textFill="WHITE" />
+                        <Label fx:id="errorLabelStrumento" layoutX="309.0" layoutY="263.0" prefHeight="16.0" prefWidth="256.0" textFill="#b90000" />
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+
+
+				<Tab closable="false" text="Aggiungi un satellite" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<TextField layoutX="315.0" layoutY="109.0" prefHeight="25.0" prefWidth="253.0" promptText="Nome del satellite" style="-fx-background-radius: 0;" />
+								<DatePicker layoutX="355.0" layoutY="186.0" promptText="Data inizio missione" style="-fx-background-radius: 0;" />
+								<DatePicker layoutX="355.0" layoutY="258.0" promptText="Data fine missione" style="-fx-background-radius: 0;" />
+								<TextField layoutX="315.0" layoutY="335.0" prefHeight="25.0" prefWidth="253.0" promptText="Agenzie " style="-fx-background-radius: 0;" />
+								<Button layoutX="402.0" layoutY="407.0" mnemonicParsing="false" onAction="#onNumSegSearch" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Aggiungi" textFill="WHITE" />
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+
+
+
+				<Tab closable="false" text="Importa un nuovo file" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="671.0" prefWidth="906.0">
+							<children>
+								<RadioButton layoutX="347.0" layoutY="192.0" mnemonicParsing="false" text="Contorni di filamenti" textFill="WHITE">
+									<toggleGroup>
+										<ToggleGroup fx:id="tipoFile" />
+									</toggleGroup>
+								</RadioButton>
+								<RadioButton layoutX="347.0" layoutY="152.0" mnemonicParsing="false" selected="true" text="Filamenti" textFill="WHITE" toggleGroup="$tipoFile" />
+								<RadioButton layoutX="347.0" layoutY="273.0" mnemonicParsing="false" text="Stelle" textFill="WHITE" toggleGroup="$tipoFile" />
+								<RadioButton layoutX="347.0" layoutY="234.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="152.0" text="Segmenti di filamenti" textFill="WHITE" toggleGroup="$tipoFile" />
+								<TextField layoutX="251.0" layoutY="72.0" prefHeight="25.0" prefWidth="382.0" promptText="Indirizzo del file" style="-fx-background-radius: 0;" />
+								<Label layoutX="377.0" layoutY="119.0" text="Scegli tipo di file:" textFill="WHITE" />
+								<Button layoutX="383.0" layoutY="344.0" mnemonicParsing="false" onAction="#onNumSegSearch" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Importa" textFill="WHITE" />
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+
+
 				<Tab closable="false" text="Informazioni Filamento">
 					<content>
 						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="671.0" prefWidth="906.0">
@@ -95,23 +108,53 @@
 										<Font size="18.0" />
 									</font>
 								</Label>
-								<Label layoutX="341.0" layoutY="227.0" text="Longitudine del centroide:" textFill="WHITE">
+								<Label layoutX="29.0" layoutY="286.0" text="Longitudine del centroide:" textFill="WHITE">
 									<font>
 										<Font size="18.0" />
 									</font>
 								</Label>
-								<Label layoutX="29.0" layoutY="312.0" text="Estensione del contorno:" textFill="WHITE">
+								<Label layoutX="27.0" layoutY="472.0" text="Estensione del contorno (Lon):" textFill="WHITE">
 									<font>
 										<Font size="18.0" />
 									</font>
 								</Label>
-								<Label layoutX="29.0" layoutY="387.0" text="Numero di segmenti:" textFill="WHITE">
+								<Label layoutX="29.0" layoutY="347.0" text="Numero di segmenti:" textFill="WHITE">
 									<font>
 										<Font size="18.0" />
 									</font>
 								</Label>
 								<RadioButton fx:id="idToggleInfo" layoutX="39.0" layoutY="102.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="67.0" selected="true" text="ID" textFill="WHITE" toggleGroup="$idNomeInfo" />
-								<Label fx:id="errorLabelInfo" layoutX="272.0" layoutY="144.0" prefHeight="17.0" prefWidth="121.0" textFill="#b90000" />
+								<Label fx:id="errorLabelInfo" layoutX="272.0" layoutY="144.0" prefHeight="17.0" prefWidth="315.0" textFill="#b90000" />
+								<Label fx:id="labelNumSegInfo" layoutX="218.0" layoutY="347.0" prefHeight="21.0" prefWidth="244.0" textFill="WHITE">
+									<font>
+										<Font size="18.0" />
+									</font>
+								</Label>
+								<Label layoutX="27.0" layoutY="410.0" text="Estensione del contorno (Lat):" textFill="WHITE">
+									<font>
+										<Font size="18.0" />
+									</font>
+								</Label>
+								<Label fx:id="labelLatCentroInfo" layoutX="250.0" layoutY="227.0" prefHeight="21.0" prefWidth="271.0" textFill="WHITE">
+									<font>
+										<Font size="18.0" />
+									</font>
+								</Label>
+								<Label fx:id="labelLonCentroInfo" layoutX="266.0" layoutY="286.0" prefHeight="21.0" prefWidth="271.0" textFill="WHITE">
+									<font>
+										<Font size="18.0" />
+									</font>
+								</Label>
+								<Label fx:id="labelLatEstInfo" layoutX="303.0" layoutY="410.0" prefHeight="21.0" prefWidth="271.0" textFill="WHITE">
+									<font>
+										<Font size="18.0" />
+									</font>
+								</Label>
+								<Label fx:id="labelLonEstInfo" layoutX="303.0" layoutY="472.0" prefHeight="21.0" prefWidth="271.0" textFill="WHITE">
+									<font>
+										<Font size="18.0" />
+									</font>
+								</Label>
 							</children>
 						</AnchorPane>
 					</content>
@@ -120,27 +163,26 @@
 					<content>
 						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 							<children>
-								<TextField fx:id="brillanzaText" layoutX="36.0" layoutY="45.0" prefHeight="26.0" prefWidth="234.0" promptText="Brillanza" style="-fx-background-radius: 0;" />
-								<TextField fx:id="ellitticitaText" layoutX="392.0" layoutY="50.0" prefHeight="26.0" prefWidth="236.0" promptText="Ellitticità" style="-fx-background-radius: 0;" />
-								<Button layoutX="752.0" layoutY="47.0" mnemonicParsing="false" onAction="#onBrilEllSearch" prefHeight="32.0" prefWidth="81.0" style="-fx-background-radius: 0; -fx-background-color: #283593;" text="Cerca" textFill="WHITE" />
-								<TableView layoutX="36.0" layoutY="120.0" prefHeight="516.0" prefWidth="797.0">
-									<columns>
-										<TableColumn prefWidth="89.0" text="Nome" />
-										<TableColumn prefWidth="38.0" text="ID" />
-										<TableColumn prefWidth="87.0" text="Constrasto" />
-										<TableColumn prefWidth="86.0" text="Ellitticità" />
-										<TableColumn prefWidth="67.0" text="Densità" />
-										<TableColumn prefWidth="123.0" text="Temperatura" />
-										<TableColumn prefWidth="83.0" text="Flusso" />
-										<TableColumn prefWidth="103.0" text="Satellite" />
-										<TableColumn prefWidth="118.0" text="Strumento" />
-									</columns>
-								</TableView>
-								<TextField fx:id="pagNumConEll" editable="false" layoutX="411.0" layoutY="650.0" prefHeight="26.0" prefWidth="35.0" style="-fx-background-radius: 0;" />
+								<TextField fx:id="brillanzaText" layoutX="36.0" layoutY="45.0" prefHeight="26.0" prefWidth="204.0" promptText="Brillanza" style="-fx-background-radius: 0;" />
+								<TextField fx:id="ellitticitaMinText" layoutX="258.0" layoutY="45.0" prefHeight="26.0" prefWidth="236.0" promptText="Ellitticità minima" style="-fx-background-radius: 0;" />
+								<Button layoutX="752.0" layoutY="42.0" mnemonicParsing="false" onAction="#onBrilEllSearch" prefHeight="32.0" prefWidth="81.0" style="-fx-background-radius: 0; -fx-background-color: #283593;" text="Cerca" textFill="WHITE" />
+								<TableView fx:id="tableFilConEll" layoutX="36.0" layoutY="120.0" prefHeight="510.0" prefWidth="797.0" />
+								<TextField fx:id="pagNumConEll" editable="false" layoutX="411.0" layoutY="650.0" prefHeight="26.0" prefWidth="48.0" style="-fx-background-radius: 0;" />
 								<Label layoutX="381.0" layoutY="654.0" text="Pag:" textFill="WHITE" />
 								<Button layoutX="251.0" layoutY="651.0" mnemonicParsing="false" onAction="#onPagPrevConEll" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Pag. precedente" textFill="WHITE" />
 								<Button layoutX="484.0" layoutY="651.0" mnemonicParsing="false" onAction="#onPagSucConEll" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Pag. successiva" textFill="WHITE" />
 								<Label fx:id="errorLabelConEll" layoutX="36.0" layoutY="79.0" prefHeight="17.0" prefWidth="593.0" textFill="#b90000" />
+								<TextField fx:id="ellitticitaMaxText" layoutX="505.0" layoutY="45.0" prefHeight="26.0" prefWidth="236.0" promptText="Ellitticità massima" style="-fx-background-radius: 0;" />
+								<Label layoutX="36.0" layoutY="101.0" text="Percentuale di filamenti trovati: " textFill="WHITE">
+									<font>
+										<Font size="15.0" />
+									</font>
+								</Label>
+								<Label fx:id="percentualeFilConEll" layoutX="279.0" layoutY="101.0" textFill="WHITE">
+									<font>
+										<Font size="15.0" />
+									</font>
+								</Label>
 							</children>
 						</AnchorPane>
 					</content>
@@ -149,28 +191,26 @@
 					<content>
 						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 							<children>
-								<TextField fx:id="minNumSeg" layoutX="37.0" layoutY="38.0" prefHeight="26.0" prefWidth="300.0" promptText="Valore minimo" />
-								<TextField fx:id="maxNumSeg" layoutX="410.0" layoutY="40.0" prefHeight="26.0" prefWidth="300.0" promptText="Valore massimo" />
-								<Button layoutX="773.0" layoutY="37.0" mnemonicParsing="false" onAction="#onNumSegSearch" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Cerca" textFill="WHITE" />
+								<TextField fx:id="minNumSeg" layoutX="37.0" layoutY="38.0" prefHeight="26.0" prefWidth="300.0" promptText="Valore minimo" style="-fx-background-radius: 0;" />
+								<TextField fx:id="maxNumSeg" layoutX="395.0" layoutY="38.0" prefHeight="26.0" prefWidth="300.0" promptText="Valore massimo" style="-fx-background-radius: 0;" />
+								<Button layoutX="758.0" layoutY="36.0" mnemonicParsing="false" onAction="#onNumSegSearch" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Cerca" textFill="WHITE" />
 								<Label layoutX="37.0" layoutY="14.0" text="N.B. In caso non si voglia un minimo o un massimo, inserire come valore -1" textFill="WHITE" />
-								<TableView layoutX="37.0" layoutY="109.0" prefHeight="557.0" prefWidth="816.0">
-									<columns>
-										<TableColumn prefWidth="89.0" text="Nome" />
-										<TableColumn prefWidth="38.0" text="ID" />
-										<TableColumn prefWidth="87.0" text="Constrasto" />
-										<TableColumn prefWidth="86.0" text="Ellitticità" />
-										<TableColumn prefWidth="67.0" text="Densità" />
-										<TableColumn prefWidth="123.0" text="Temperatura" />
-										<TableColumn prefWidth="83.0" text="Flusso" />
-										<TableColumn prefWidth="103.0" text="Satellite" />
-										<TableColumn prefWidth="118.0" text="Strumento" />
-									</columns>
-								</TableView>
-								<TextField fx:id="pageCountNumSeg" layoutX="433.0" layoutY="681.0" prefHeight="26.0" prefWidth="24.0" />
-								<Label layoutX="399.0" layoutY="686.0" text="Pag:" textFill="WHITE" />
-								<Button layoutX="271.0" layoutY="682.0" mnemonicParsing="false" onAction="#onPagPrevNumSeg" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Pag. precedente" textFill="WHITE" />
-								<Button layoutX="491.0" layoutY="682.0" mnemonicParsing="false" onAction="#onPagSucNumSeg" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Pag. successiva" textFill="WHITE" />
-								<Label fx:id="errorLabelNumSeg" layoutX="37.0" layoutY="76.0" prefHeight="17.0" prefWidth="413.0" textFill="#b90000" />
+								<TableView fx:id="tableFilNumSeg" layoutX="37.0" layoutY="109.0" prefHeight="510.0" prefWidth="801.0" />
+								<TextField fx:id="pageCountNumSeg" editable="false" layoutX="434.0" layoutY="640.0" prefHeight="26.0" prefWidth="39.0" style="-fx-background-radius: 0;" />
+								<Label layoutX="396.0" layoutY="645.0" text="Pag:" textFill="WHITE" />
+								<Button layoutX="254.0" layoutY="640.0" mnemonicParsing="false" onAction="#onPagPrevNumSeg" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Pag. precedente" textFill="WHITE" />
+								<Button layoutX="495.0" layoutY="640.0" mnemonicParsing="false" onAction="#onPagSucNumSeg" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Pag. successiva" textFill="WHITE" />
+								<Label fx:id="errorLabelNumSeg" layoutX="37.0" layoutY="67.0" prefHeight="17.0" prefWidth="413.0" textFill="#b90000" />
+								<Label layoutX="37.0" layoutY="84.0" text="Filamenti trovati: " textFill="WHITE">
+									<font>
+										<Font size="15.0" />
+									</font>
+								</Label>
+								<Label fx:id="labelFilNumSeg" layoutX="171.0" layoutY="84.0" textFill="WHITE">
+									<font>
+										<Font size="15.0" />
+									</font>
+								</Label>
 							</children>
 						</AnchorPane>
 					</content>
@@ -179,33 +219,18 @@
 					<content>
 						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 							<children>
-								<TextField layoutX="36.0" layoutY="48.0" prefHeight="26.0" prefWidth="157.0" promptText="Latitudine del centroide" />
-								<TextField layoutX="205.0" layoutY="49.0" prefHeight="26.0" prefWidth="160.0" promptText="Longitudine del centroide" />
-								<Button layoutX="758.0" layoutY="46.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="75.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Cerca" textFill="WHITE" />
-								<TableView layoutX="36.0" layoutY="120.0" prefHeight="529.0" prefWidth="797.0">
-									<columns>
-										<TableColumn prefWidth="89.0" text="Nome" />
-										<TableColumn prefWidth="38.0" text="ID" />
-										<TableColumn prefWidth="87.0" text="Constrasto" />
-										<TableColumn prefWidth="86.0" text="Ellitticità" />
-										<TableColumn prefWidth="67.0" text="Densità" />
-										<TableColumn prefWidth="123.0" text="Temperatura" />
-										<TableColumn prefWidth="83.0" text="Flusso" />
-										<TableColumn prefWidth="103.0" text="Satellite" />
-										<TableColumn prefWidth="118.0" text="Strumento" />
-									</columns>
-								</TableView>
-								<TextField layoutX="442.0" layoutY="673.0" prefHeight="26.0" prefWidth="24.0" />
-								<Label layoutX="412.0" layoutY="678.0" text="Pag:" textFill="WHITE" />
-								<Button layoutX="263.0" layoutY="674.0" mnemonicParsing="false" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Pag. precedente" textFill="WHITE" />
-								<Button layoutX="523.0" layoutY="674.0" mnemonicParsing="false" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Pag. successiva" textFill="WHITE" />
-								<TextField layoutX="585.0" layoutY="48.0" prefHeight="26.0" prefWidth="156.0" promptText="Raggio/Lato" />
-								<RadioButton layoutX="404.0" layoutY="53.0" mnemonicParsing="false" selected="true" text="Cerchio" textFill="WHITE">
+								<TableView fx:id="tableFilRegione" layoutX="36.0" layoutY="102.0" prefHeight="577.0" prefWidth="798.0" />
+								<TextField fx:id="lonCentroRegioneText" layoutX="205.0" layoutY="49.0" prefHeight="26.0" prefWidth="160.0" promptText="Longitudine del centroide" style="-fx-background-radius: 0;" />
+								<Button layoutX="758.0" layoutY="46.0" mnemonicParsing="false" onAction="#onFilRegioneSearch" prefHeight="32.0" prefWidth="75.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Cerca" textFill="WHITE" />
+								<TextField fx:id="raggioLatoText" layoutX="585.0" layoutY="48.0" prefHeight="26.0" prefWidth="156.0" promptText="Raggio/Lato" style="-fx-background-radius: 0;" />
+								<RadioButton fx:id="cerchioRadioButtonRegione" layoutX="404.0" layoutY="53.0" mnemonicParsing="false" selected="true" text="Cerchio" textFill="WHITE">
 									<toggleGroup>
 										<ToggleGroup fx:id="cerchioQuadratoRegione" />
 									</toggleGroup>
 								</RadioButton>
-								<RadioButton layoutX="487.0" layoutY="53.0" mnemonicParsing="false" text="Quadrato" textFill="WHITE" toggleGroup="$cerchioQuadratoRegione" />
+								<RadioButton fx:id="quadratoRadioButtonRegione" layoutX="487.0" layoutY="53.0" mnemonicParsing="false" text="Quadrato" textFill="WHITE" toggleGroup="$cerchioQuadratoRegione" />
+								<TextField fx:id="latCentroRegioneText" layoutX="36.0" layoutY="48.0" prefHeight="26.0" prefWidth="157.0" promptText="Latitudine del centroide" style="-fx-background-radius: 0;" />
+								<Label fx:id="errorLabelFilRegione" layoutX="36.0" layoutY="78.0" prefHeight="16.0" prefWidth="433.0" textFill="#b90000" />
 							</children>
 						</AnchorPane>
 					</content>
@@ -214,19 +239,15 @@
 					<content>
 						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="515.0" prefWidth="1186.0">
 							<children>
-								<TextField layoutX="34.0" layoutY="42.0" prefHeight="25.0" prefWidth="247.0" promptText="Id del filamento" style="-fx-background-radius: 0;" />
-								<Button layoutX="323.0" layoutY="42.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Cerca" textFill="WHITE" />
-								<ScrollPane hbarPolicy="NEVER" layoutX="34.0" layoutY="114.0" prefHeight="584.0" prefWidth="819.0">
-									<content>
-										<TableView prefHeight="601.0" prefWidth="794.0">
-											<columns>
-												<TableColumn prefWidth="75.0" text="Nome" />
-												<TableColumn prefWidth="75.0" text="C2" />
-											</columns>
-										</TableView>
-									</content>
-								</ScrollPane>
-								<Label layoutX="34.0" layoutY="80.0" textFill="#b90000" />
+								<TextField fx:id="idStelleInFilText" layoutX="34.0" layoutY="42.0" prefHeight="25.0" prefWidth="247.0" promptText="Id del filamento" style="-fx-background-radius: 0;" />
+								<Button layoutX="323.0" layoutY="42.0" mnemonicParsing="false" onAction="#onStelleInFilSearch" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Cerca" textFill="WHITE" />
+								<Label fx:id="errorLabelStelleInFil" layoutX="34.0" layoutY="80.0" prefHeight="16.0" prefWidth="321.0" textFill="#b90000" />
+								<TableView fx:id="tableStelleInFilamento" layoutX="34.0" layoutY="121.0" prefHeight="553.0" prefWidth="798.0" />
+								<Label fx:id="labelPercentualiStelleInFil" layoutX="34.0" layoutY="102.0" prefHeight="19.0" prefWidth="834.0" textFill="WHITE">
+									<font>
+										<Font size="15.0" />
+									</font>
+								</Label>
 							</children>
 						</AnchorPane>
 					</content>
@@ -235,11 +256,15 @@
 					<content>
 						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="982.0">
 							<children>
-								<TextField layoutX="26.0" layoutY="25.0" promptText="Longitudine del centro" style="-fx-background-radius: 0;" />
-								<TextField layoutX="202.0" layoutY="25.0" promptText="Latitudine del centro" style="-fx-background-radius: 0;" />
-								<TextField layoutX="377.0" layoutY="25.0" promptText="Base" style="-fx-background-radius: 0;" />
-								<TextField layoutX="550.0" layoutY="25.0" promptText="Altezza" style="-fx-background-radius: 0;" />
-								<Button layoutX="733.0" layoutY="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Cerca" textFill="WHITE" />
+								<TextField fx:id="lonCentroStatRegione" layoutX="26.0" layoutY="25.0" promptText="Longitudine del centro" style="-fx-background-radius: 0;" />
+								<TextField fx:id="latCentroStatRegione" layoutX="202.0" layoutY="25.0" promptText="Latitudine del centro" style="-fx-background-radius: 0;" />
+								<TextField fx:id="baseStatRegione" layoutX="377.0" layoutY="25.0" promptText="Base" style="-fx-background-radius: 0;" />
+								<TextField fx:id="altezzaStatRegione" layoutX="555.0" layoutY="25.0" promptText="Altezza" style="-fx-background-radius: 0;" />
+								<Button layoutX="735.0" layoutY="25.0" mnemonicParsing="false" onAction="#onStatRegioneSearch" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Cerca" textFill="WHITE" />
+								<Label fx:id="labelPercentualeStelleTotale" layoutX="26.0" layoutY="149.0" prefHeight="16.0" prefWidth="832.0" textFill="WHITE" />
+								<Label fx:id="labelPercentualeStelleDentro" layoutX="35.0" layoutY="261.0" prefHeight="16.0" prefWidth="832.0" textFill="WHITE" />
+								<Label fx:id="labelPercentualeStelleFuori" layoutX="35.0" layoutY="358.0" prefHeight="16.0" prefWidth="832.0" textFill="WHITE" />
+								<Label fx:id="errorLabelStatRegione" layoutX="26.0" layoutY="62.0" prefHeight="16.0" prefWidth="629.0" textFill="#b90000" />
 							</children>
 						</AnchorPane>
 					</content>
@@ -248,8 +273,13 @@
 					<content>
 						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 							<children>
-								<TextField layoutX="368.0" layoutY="194.0" promptText="Id del segmento" />
-								<Button layoutX="412.0" layoutY="251.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Cerca" textFill="WHITE" />
+								<TextField fx:id="idSegDistText" layoutX="358.0" layoutY="190.0" promptText="Id del segmento" style="-fx-background-radius: 0;" />
+								<Button layoutX="414.0" layoutY="252.0" mnemonicParsing="false" onAction="#onDistSegSearch" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Cerca" textFill="WHITE" />
+								<Label layoutX="311.0" layoutY="313.0" text="Distanza del punto di massimo: " textFill="WHITE" />
+								<Label layoutX="311.0" layoutY="367.0" text="Distanza del punto di minimo: " textFill="WHITE" />
+								<Label fx:id="errorLabelDistSeg" layoutX="358.0" layoutY="216.0" prefHeight="16.0" prefWidth="201.0" textFill="#b90000" />
+								<Label fx:id="distMaxLabel" layoutX="529.0" layoutY="313.0" prefHeight="16.0" prefWidth="170.0" textFill="WHITE" />
+								<Label fx:id="distMinLabel" layoutX="529.0" layoutY="367.0" prefHeight="16.0" prefWidth="170.0" textFill="WHITE" />
 							</children>
 						</AnchorPane>
 					</content>
@@ -258,18 +288,14 @@
 					<content>
 						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 							<children>
-								<TextField layoutX="39.0" layoutY="37.0" promptText="Id del filamento" />
-								<Button layoutX="224.0" layoutY="37.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Cerca" textFill="WHITE" />
-								<TableView layoutX="39.0" layoutY="85.0" prefHeight="570.0" prefWidth="811.0">
-									<columns>
-										<TableColumn prefWidth="75.0" text="C1" />
-										<TableColumn prefWidth="75.0" text="C2" />
-									</columns>
-								</TableView>
-								<TextField fx:id="pageCountNumSeg1" layoutX="442.0" layoutY="666.0" prefHeight="26.0" prefWidth="24.0" />
-								<Label layoutX="419.0" layoutY="670.0" text="Pag:" textFill="WHITE" />
-								<Button layoutX="284.0" layoutY="666.0" mnemonicParsing="false" onAction="#onPagPrevNumSeg" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Pag. precedente" textFill="WHITE" />
-								<Button layoutX="513.0" layoutY="667.0" mnemonicParsing="false" onAction="#onPagSucNumSeg" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Pag. successiva" textFill="WHITE" />
+								<Button layoutX="224.0" layoutY="37.0" mnemonicParsing="false" onAction="#onStelleSpinaSearch" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Cerca" textFill="WHITE" />
+								<TableView fx:id="tableStelleSpina" layoutX="39.0" layoutY="85.0" prefHeight="510.0" prefWidth="811.0" />
+								<TextField fx:id="pageCountStelleSpina" editable="false" layoutX="457.0" layoutY="620.0" prefHeight="26.0" prefWidth="40.0" />
+								<Label layoutX="428.0" layoutY="625.0" text="Pag:" textFill="WHITE" />
+								<Button layoutX="262.0" layoutY="620.0" mnemonicParsing="false" onAction="#onPagPrevStelleSpina" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Pag. precedente" textFill="WHITE" />
+								<Button layoutX="546.0" layoutY="620.0" mnemonicParsing="false" onAction="#onPagSucStelleSpina" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Pag. successiva" textFill="WHITE" />
+								<TextField fx:id="idFilSpinaText" layoutX="39.0" layoutY="37.0" promptText="Id del filamento" style="-fx-background-radius: 0;" />
+								<Label fx:id="errorLabelStelleSpina" layoutX="39.0" layoutY="63.0" prefHeight="16.0" prefWidth="349.0" textFill="#b90000" />
 							</children>
 						</AnchorPane>
 					</content>

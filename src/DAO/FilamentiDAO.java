@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import bean.BeanFilNumSeg;
 import bean.BeanFilamentiConEll;
 import bean.BeanFilamento;
 import bean.Centroide;
@@ -33,6 +35,12 @@ public class FilamentiDAO {
 		numSeg = getNumSegDesignazione(nome, connection);
 		beanFilamento = new BeanFilamento(numSeg, centroide.getLat(), centroide.getLon(), estensione.getLatitudine(),
 				estensione.getLongitudine());
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return beanFilamento;
 	}
 
@@ -53,6 +61,12 @@ public class FilamentiDAO {
 		numSeg = getNumSegId(id, connection);
 		beanFilamento = new BeanFilamento(numSeg, centroide.getLat(), centroide.getLon(), estensione.getLatitudine(),
 				estensione.getLongitudine());
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return beanFilamento;
 	}
 
@@ -128,6 +142,14 @@ public class FilamentiDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		try {
+			stmt.close();
+			resultSet.close();
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return idFil;
 	}
 
@@ -162,6 +184,14 @@ public class FilamentiDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		try {
+			stmt.close();
+			resultSet.close();
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return filamenti;
 	}
 
@@ -177,7 +207,7 @@ public class FilamentiDAO {
 			e.printStackTrace();
 		}
 		try {
-			String sql = "SELECT distinct idFil FROM poscontorno WHERE SQRT(ABS(POWER((Latitudine-?),2) - POWER((Longitudine - ?), 2))) <= ? GROUP BY idfil";
+			String sql = "SELECT distinct idFil FROM poscontorno WHERE SQRT(ABS(POWER((Latitudine-?),2) + POWER((Longitudine - ?), 2))) <= ? GROUP BY idfil";
 			stmt = connection.prepareStatement(sql);
 			stmt.setDouble(1, latCentro);
 			stmt.setDouble(2, lonCentro);
@@ -188,6 +218,14 @@ public class FilamentiDAO {
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			stmt.close();
+			resultSet.close();
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return filamenti;
@@ -259,6 +297,7 @@ public class FilamentiDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return result;
 	}
 
@@ -308,6 +347,12 @@ public class FilamentiDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		try {
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public Centroide getCentroideId(int id, Connection connection) {
@@ -328,6 +373,13 @@ public class FilamentiDAO {
 			longitudine = resultSet.getDouble("lon");
 			centroide = new Centroide(latitudine, longitudine);
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			stmt.close();
+			resultSet.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return centroide;
@@ -351,6 +403,13 @@ public class FilamentiDAO {
 			longitudine = resultSet.getDouble("lon");
 			centroide = new Centroide(latitudine, longitudine);
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			stmt.close();
+			resultSet.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return centroide;
@@ -377,6 +436,13 @@ public class FilamentiDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		try {
+			stmt.close();
+			resultSet.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return estensione;
 	}
 
@@ -400,6 +466,13 @@ public class FilamentiDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		try {
+			stmt.close();
+			resultSet.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return estensione;
 	}
 
@@ -416,6 +489,13 @@ public class FilamentiDAO {
 			numSeg = resultSet.getInt("num");
 
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			stmt.close();
+			resultSet.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return numSeg;
@@ -435,6 +515,13 @@ public class FilamentiDAO {
 			numSeg = resultSet.getInt("num");
 
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			stmt.close();
+			resultSet.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return numSeg;
@@ -509,6 +596,14 @@ public class FilamentiDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		try {
+			stmt.close();
+			resultSet.close();
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return count;
 	}
 
@@ -532,6 +627,14 @@ public class FilamentiDAO {
 			resultSet.next();
 			count = resultSet.getInt("num");
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			stmt.close();
+			resultSet.close();
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return count;
@@ -569,51 +672,50 @@ public class FilamentiDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		try {
+			stmt.close();
+			resultSet.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return filamenti;
 	}
 
-	public static void main(String[] args) {
-		/*
-		 * BeanFilamento bean, bean1; System.out.println("start"); bean =
-		 * dao.InformazioniFilamentoDesignazione("SDC10.014-0.818"); bean1 =
-		 * dao.InformazioniFilamentoId(383); System.out.println("finish");
-		 * System.out.println(bean.getEstensioneLat());
-		 * System.out.println(bean.getEstensioneLon());
-		 * System.out.println(bean.getLatCentroide());
-		 * System.out.println(bean.getLonCentroide());
-		 * System.out.println(bean.getNumSeg());
-		 * System.out.println(bean1.getEstensioneLat());
-		 * System.out.println(bean1.getEstensioneLon());
-		 * System.out.println(bean1.getLatCentroide());
-		 * System.out.println(bean1.getLonCentroide());
-		 * System.out.println(bean1.getNumSeg());
-		 */
+	public ArrayList<BeanFilNumSeg> filamentiNumSeg(ArrayList<Filamento> filamenti) {
+		ArrayList<BeanFilNumSeg> result = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		try {
+			conn = DriverManager.getConnection("jdbc:postgresql:ProgettoDB", "postgres", "postgres");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			for (int i = 0; i < filamenti.size(); i++) {
+				String sql = "SELECT count(id) AS numseg FROM scheletro WHERE idfilamento = ?";
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, filamenti.get(i).getID());
+				resultSet = stmt.executeQuery();
+				resultSet.next();
+				int numSeg = resultSet.getInt("numseg");
+				BeanFilNumSeg bean = new BeanFilNumSeg(filamenti.get(i), numSeg);
+				result.add(bean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			stmt.close();
+			resultSet.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
 
-		BeanFilamentiConEll bean;
-		ArrayList<Filamento> fil;
-		System.out.println("start");
-		ControllerFilamenti con = new ControllerFilamenti();
-		bean = con.SearchFilamentoConEll(1,2,3);
-		System.out.println("finish");
-		fil = bean.getFilamenti();
-		System.out.println(fil.size());
-		/*for (int i = 0; i < fil.size(); i++) {
-			System.out.println(fil.get(i).getID());
-		}*/
-
-		// <<<<<<<<<N.B>>>>>>>>>.
-
-		// posizione[1...N] id trovati
-
-		/*
-		 * ArrayList<Integer> id; System.out.println("start"); id =
-		 * dao.FilamentiNumSeg(1, 100000); System.out.println("finish");
-		 * System.out.println(id.size()); for (int i = 0; i < id.size(); i ++) {
-		 * System.out.println(id.get(i)); }
-		 */
-		/*
-		 * ControllerStelle cont = new ControllerStelle();
-		 * cont.StelleInFilRettangolo(0,0, 100000, 1000000); System.out.println("END");
-		 */
 	}
 }

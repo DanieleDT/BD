@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 
 import DAO.FilamentiDAO;
+import bean.BeanFilNumSeg;
 import bean.BeanFilamentiConEll;
 import bean.BeanFilamento;
 import entity.Filamento;
@@ -31,9 +32,11 @@ public class ControllerFilamenti {
 	public ArrayList<Filamento> FilamentiNumSegmenti(int min, int max){
 		ArrayList<Integer> id;
 		ArrayList<Filamento> filamenti;
+		//ArrayList<BeanFilNumSeg> result;
 		FilamentiDAO dao = new FilamentiDAO();
 		id = dao.FilamentiNumSeg(min, max);
 		filamenti = dao.loadFilamentiById(id);
+		//result = dao.filamentiNumSeg(filamenti);
 		return filamenti;
 	}
 	
