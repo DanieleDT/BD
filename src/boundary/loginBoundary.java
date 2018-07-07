@@ -52,8 +52,6 @@ public class loginBoundary {
 	@SuppressWarnings("deprecation")
 	public void login() {
 		// da sostituire la variabile login con la chiamata a funzione
-		Boolean login = true;
-		Boolean admin = false;
 		Stage currentStage = (Stage) usernameText.getScene().getWindow();
 		if (usernameText.getText().equals("") || passwordText.getText().equals("")) {
 			setErrorMsg("Username o password vuoti non ammessi");
@@ -67,7 +65,6 @@ public class loginBoundary {
 					url = new File("src/xfml/Admin.fxml").toURL();
 					mainPane = (Pane) FXMLLoader.load(url);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				String css = this.getClass().getResource("/User.css").toExternalForm();
@@ -86,7 +83,6 @@ public class loginBoundary {
 					url = new File("src/xfml/User.fxml").toURL();
 					mainPane = (Pane) FXMLLoader.load(url);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				String css = this.getClass().getResource("/User.css").toExternalForm();
