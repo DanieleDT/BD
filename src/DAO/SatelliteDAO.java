@@ -34,7 +34,7 @@ public class SatelliteDAO {
 		return result;
 	}
 	
-	public static void insertFilamento(String nome, String agenzia, LocalDate dataInizio, LocalDate dataFine) {
+	public static void insertSatellite(String nome, String agenzia, LocalDate dataInizio, LocalDate dataFine) {
 		PreparedStatement stmt = null;
 		try {
 			Connection connection = DriverManager.getConnection("jdbc:postgresql:ProgettoDB", "postgres", "postgres");

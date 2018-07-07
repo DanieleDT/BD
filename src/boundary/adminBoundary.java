@@ -1174,7 +1174,7 @@ public class adminBoundary implements Initializable {
 				fiveSecondsWonder.play();
 			} else {
 				// aggiungo con data fine
-				SatelliteDAO.insertFilamento(nomeSatellite.getText(), agenziaText.getText(),
+				SatelliteDAO.insertSatellite(nomeSatellite.getText(), agenziaText.getText(),
 						dataInizioMissione.getValue(), dataFineMissione.getValue());
 				dataInizioMissione.setValue(null);
 				dataFineMissione.setValue(null);
@@ -1194,7 +1194,7 @@ public class adminBoundary implements Initializable {
 			}
 		} else {
 			// aggiungo senza data fine
-			SatelliteDAO.insertFilamento(nomeSatellite.getText(), agenziaText.getText(), dataInizioMissione.getValue(),
+			SatelliteDAO.insertSatellite(nomeSatellite.getText(), agenziaText.getText(), dataInizioMissione.getValue(),
 					dataFineMissione.getValue());
 			dataInizioMissione.setValue(null);
 			dataFineMissione.setValue(null);
