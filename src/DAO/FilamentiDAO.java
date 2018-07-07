@@ -12,8 +12,6 @@ import bean.BeanFilamentiConEll;
 import bean.BeanFilamento;
 import bean.Centroide;
 import bean.Estensione;
-import controller.ControllerFilamenti;
-import controller.ControllerStelle;
 import entity.Filamento;
 
 public class FilamentiDAO {
@@ -38,7 +36,6 @@ public class FilamentiDAO {
 		try {
 			connection.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return beanFilamento;
@@ -64,7 +61,6 @@ public class FilamentiDAO {
 		try {
 			connection.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return beanFilamento;
@@ -85,8 +81,6 @@ public class FilamentiDAO {
 
 	// RF 7
 	public ArrayList<Integer> FilamentiNumSeg(int min, int max) {
-		// ArrayList[0] == #filamenti trovati
-		// ArrayList[1...N] == ID filamenti trovati
 		// -1 per vincolo non necessario
 		ArrayList<Integer> idFil = new ArrayList<Integer>();
 		Connection connection = null;
@@ -147,7 +141,6 @@ public class FilamentiDAO {
 			resultSet.close();
 			connection.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return idFil;
@@ -189,7 +182,6 @@ public class FilamentiDAO {
 			resultSet.close();
 			connection.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return filamenti;
@@ -225,7 +217,6 @@ public class FilamentiDAO {
 			resultSet.close();
 			connection.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return filamenti;
@@ -350,7 +341,6 @@ public class FilamentiDAO {
 		try {
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -379,7 +369,6 @@ public class FilamentiDAO {
 			stmt.close();
 			resultSet.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return centroide;
@@ -409,7 +398,6 @@ public class FilamentiDAO {
 			stmt.close();
 			resultSet.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return centroide;
@@ -440,7 +428,6 @@ public class FilamentiDAO {
 			stmt.close();
 			resultSet.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return estensione;
@@ -470,7 +457,6 @@ public class FilamentiDAO {
 			stmt.close();
 			resultSet.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return estensione;
@@ -495,7 +481,6 @@ public class FilamentiDAO {
 			stmt.close();
 			resultSet.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return numSeg;
@@ -521,7 +506,6 @@ public class FilamentiDAO {
 			stmt.close();
 			resultSet.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return numSeg;
@@ -601,7 +585,6 @@ public class FilamentiDAO {
 			resultSet.close();
 			connection.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return count;
@@ -634,7 +617,6 @@ public class FilamentiDAO {
 			resultSet.close();
 			connection.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return count;
@@ -677,7 +659,6 @@ public class FilamentiDAO {
 			resultSet.close();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return filamenti;
@@ -712,7 +693,6 @@ public class FilamentiDAO {
 			resultSet.close();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;

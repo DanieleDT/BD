@@ -3,7 +3,6 @@ package controller;
 import java.util.ArrayList;
 
 import DAO.FilamentiDAO;
-import bean.BeanFilNumSeg;
 import bean.BeanFilamentiConEll;
 import bean.BeanFilamento;
 import entity.Filamento;

@@ -70,7 +70,7 @@
 								<TextField fx:id="agenziaText" layoutX="315.0" layoutY="332.0" prefHeight="25.0" prefWidth="253.0" promptText="Agenzia" style="-fx-background-radius: 0;" />
 								<Button layoutX="402.0" layoutY="404.0" mnemonicParsing="false" onAction="#onSatelliteAdd" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #283593; -fx-background-radius: 0;" text="Aggiungi" textFill="WHITE" />
                         <Label fx:id="errrorLabelAddFilamento" layoutX="316.0" layoutY="372.0" prefHeight="16.0" prefWidth="263.0" textFill="#b90000" />
-                        <Label fx:id="labelSuccessSatellite" layoutX="339.0" layoutY="467.0" text="Satellite aggiunto con successo" textFill="#74f545" />
+                        <Label fx:id="labelSuccessSatellite" layoutX="339.0" layoutY="467.0" prefHeight="16.0" prefWidth="294.0" textFill="#74f545" />
 							</children>
 						</AnchorPane>
 					</content>

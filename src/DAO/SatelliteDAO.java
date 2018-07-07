@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
-import java.time.ZoneId;
 
 public class SatelliteDAO {
 	public static boolean existSatellite(String nome) {
