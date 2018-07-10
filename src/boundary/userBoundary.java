@@ -323,6 +323,7 @@ public class userBoundary implements Initializable {
 				percentualeFilConEll.setText("");
 			}
 			final ObservableList<Filamento> observable = loadTwentyItems(1, cacheFilConEll);
+			System.out.println(observable.size());
 			tableFilConEll.setItems(observable);
 
 		}
@@ -557,7 +558,7 @@ public class userBoundary implements Initializable {
 		} else if (!FilamentiDAO.existFilamentoNoConn(idFil)) {
 			errorLabelStelleInFil.setText("Filamento non esistente");
 			Timeline fiveSecondsWonder = new Timeline(
-					new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
+					new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() { 
 						@Override
 						public void handle(ActionEvent event) {
 							errorLabelStelleInFil.setText("");
@@ -805,10 +806,10 @@ public class userBoundary implements Initializable {
 		TableColumn idCol = new TableColumn("ID");
 		idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
 
-		TableColumn densitaCol = new TableColumn("Densit√†");
+		TableColumn densitaCol = new TableColumn("Densit‡");
 		densitaCol.setCellValueFactory(new PropertyValueFactory<>("densitaMedia"));
 
-		TableColumn ellitticitaCol = new TableColumn("Ellitticit√†");
+		TableColumn ellitticitaCol = new TableColumn("Ellitticit‡");
 		ellitticitaCol.setCellValueFactory(new PropertyValueFactory<Filamento, Double>("elletticita"));
 
 		TableColumn contrastoCol = new TableColumn("Contrasto");
