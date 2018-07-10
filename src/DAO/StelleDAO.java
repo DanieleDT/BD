@@ -70,34 +70,45 @@ public class StelleDAO {
 		ArrayList<Stella> stelleInFil = new ArrayList<Stella>();
 		ArrayList<Stella> stelleNotInFil = new ArrayList<Stella>();
 		ArrayList<posContorno> contorno = null;
-		result.add(stelleInFil);
-		result.add(stelleNotInFil);
-		for (int i = 0; i <= idFil.size() - 1; i++) {
-			contorno = posContornoById(idFil.get(i));
-			for (int j = 0; j <= stelle.size() - 1; j++) {
+		
+		System.out.println("Stelle in rettangolo: " + stelle.size());
+		for (int i = 0; i <= stelle.size() - 1; i++) {
+			Boolean breaked = false;
+			for (int j = 0; j <= idFil.size() - 1; j++) {
+				contorno = posContornoById(idFil.get(j));
 				int sum = 0;
 				for (int k = 0; k <= contorno.size() - 2; k++) {
 					posContorno pos0 = contorno.get(k);
 					posContorno pos1 = contorno.get(k + 1);
-					double num = (pos0.getLongitudine() - (stelle.get(j)).getLongitudine())
-							* (pos1.getLatitudine() - stelle.get(j).getLatitudine())
-							- (pos0.getLatitudine() - stelle.get(j).getLatitudine())
-									* (pos1.getLongitudine() - stelle.get(j).getLongitudine());
-					double den = (pos0.getLongitudine() - (stelle.get(j)).getLongitudine())
-							* (pos1.getLongitudine() - stelle.get(j).getLongitudine())
-							+ (pos0.getLatitudine() - stelle.get(j).getLatitudine())
-									* (pos1.getLatitudine() - stelle.get(j).getLatitudine());
+					double num = (pos0.getLongitudine() - (stelle.get(i)).getLongitudine())
+							* (pos1.getLatitudine() - stelle.get(i).getLatitudine())
+							- (pos0.getLatitudine() - stelle.get(i).getLatitudine())
+									* (pos1.getLongitudine() - stelle.get(i).getLongitudine());
+					double den = (pos0.getLongitudine() - (stelle.get(i)).getLongitudine())
+							* (pos1.getLongitudine() - stelle.get(i).getLongitudine())
+							+ (pos0.getLatitudine() - stelle.get(i).getLatitudine())
+									* (pos1.getLatitudine() - stelle.get(i).getLatitudine());
 					double arctan = (double) Math.atan(num / den);
 					sum += arctan;
 				}
 				if (Math.abs(sum) >= 0.01) {
 					// aggiungo la j stella nell'array delle stelle comprese nei filamenti
-					stelleInFil.add(stelle.get(j));
-				} else {
-					stelleNotInFil.add(stelle.get(j));
+					stelleInFil.add(stelle.get(i));
+					breaked = true;
+					break;
 				}
 			}
+			if(!breaked) {
+				stelleNotInFil.add(stelle.get(i));
+			}else {
+				breaked = false;
+			}
 		}
+		
+		result.add(stelleInFil);
+		result.add(stelleNotInFil);
+		System.out.println("STELLE IN " + stelleInFil.size());
+		System.out.println("STELLE OUT" + stelleNotInFil.size());
 
 		// bisogna fare parse dei dati per ottenere valori percentuali
 		return result;
@@ -146,7 +157,7 @@ public class StelleDAO {
 			e.printStackTrace();
 		}
 		try {
-			String sql = "SELECT * FROM Stella WHERE longitudine >= ? AND longitudine <= ? AND latitudine >= ? AND latitudine <= ?";
+			String sql = "SELECT * FROM Stella WHERE longitudine > ? AND longitudine < ? AND latitudine > ? AND latitudine < ?";
 			stmt = connection.prepareStatement(sql);
 			stmt.setDouble(1, (lonCentro - semiBase));
 			stmt.setDouble(2, (lonCentro + semiBase));
@@ -171,7 +182,6 @@ public class StelleDAO {
 			resultSet.close();
 			connection.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return stelle;
@@ -191,7 +201,7 @@ public class StelleDAO {
 			e.printStackTrace();
 		}
 		try {
-			String sql = "SELECT distinct(idFil) FROM PosContorno WHERE Longitudine >= ? AND Longitudine <= ? AND Latitudine >= ? AND Latitudine <= ?";
+			String sql = "SELECT distinct(idFil) FROM PosContorno WHERE Longitudine > ? AND Longitudine < ? AND Latitudine > ? AND Latitudine < ?";
 			stmt = connection.prepareStatement(sql);
 			stmt.setDouble(1, (lonCentro - semiBase));
 			stmt.setDouble(2, (lonCentro + semiBase));
@@ -404,5 +414,4 @@ public class StelleDAO {
 			e.printStackTrace();
 		}
 	}
-
 }

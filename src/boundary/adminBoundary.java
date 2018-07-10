@@ -407,14 +407,18 @@ public class adminBoundary implements Initializable {
 			BeanFilamentiConEll bean = controller.SearchFilamentoConEll(brillanza, ellitticitaMin, ellitticitaMax);
 			cacheFilConEll = bean.getFilamenti();
 			if (cacheFilConEll.size() != 0) {
-				// System.out.println(cacheFilConEll.get(0).getContrasto());
+				//System.out.println(cacheFilConEll.get(0).getContrasto());
 				percentualeFilConEll.setText(
 						"" + bean.getPercentuale() * 100 + "% (" + bean.getParziale() + "/" + bean.getTotale() + ")");
 			} else {
 				percentualeFilConEll.setText("");
 			}
 			final ObservableList<Filamento> observable = loadTwentyItems(1, cacheFilConEll);
+			System.out.println(observable.size());
+			//System.out.println(observable.get(0).getNome());
+			//System.out.println(cacheFilConEll.get(0).getNome());
 			tableFilConEll.setItems(observable);
+			System.out.println(cacheFilConEll.size());
 
 		}
 	}
@@ -533,7 +537,7 @@ public class adminBoundary implements Initializable {
 
 	private ObservableList<Filamento> loadTwentyItems(int index, ArrayList<Filamento> filamenti) {
 		final ObservableList<Filamento> observable = FXCollections.observableArrayList();
-		if (index * 20 > filamenti.size()) {
+		if ((index * 20) > filamenti.size()) {
 			for (int i = ((index - 1) * 20); i < filamenti.size(); i++) {
 				observable.add(filamenti.get(i));
 			}
@@ -662,6 +666,7 @@ public class adminBoundary implements Initializable {
 			ControllerStelle cont = new ControllerStelle();
 			BeanStelleInFilamento bean = cont.stelleInFIlamento(idFil);
 			ArrayList<Stella> stelle = bean.getStelle();
+			//System.out.println(stelle.size());
 			final ObservableList<Stella> observable = FXCollections.observableArrayList();
 			for (int i = 0; i < stelle.size(); i++) {
 				observable.add(stelle.get(i));
@@ -738,7 +743,7 @@ public class adminBoundary implements Initializable {
 			ArrayList<BeanStelleInFilamento> bean = cont.StelleInFilRettangolo(lat, lon, base, altezza);
 			BeanStelleInFilamento beanDentro = bean.get(0);
 			BeanStelleInFilamento beanFuori = bean.get(1);
-			float percentoStelleDentro = ((float) beanDentro.getStelle().size() / (float) beanFuori.getStelle().size())
+			float percentoStelleDentro = ((float) beanDentro.getStelle().size() / (float) beanFuori.getStelle().size() + (float) beanDentro.getStelle().size())
 					* 100;
 			labelPercentualeStelleTotale.setText("Stelle all'interno di filamenti: " + beanDentro.getStelle().size()
 					+ " / " + beanFuori.getStelle().size() + " (" + percentoStelleDentro + "%)");
@@ -1212,47 +1217,105 @@ public class adminBoundary implements Initializable {
 			fiveSecondsWonder.play();
 		}
 	}
-
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		TableColumn nameCol = new TableColumn("Nome");
-		nameCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
+		//RF 6
+		TableColumn<Filamento,String> nomeConEll = new TableColumn<Filamento, String>("Nome");
+		nomeConEll.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
-		TableColumn idCol = new TableColumn("ID");
-		idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
+		TableColumn<Filamento, Integer> idConEll = new TableColumn<Filamento, Integer>("ID");
+		idConEll.setCellValueFactory(new PropertyValueFactory<>("ID"));
 
-		TableColumn densitaCol = new TableColumn("Densit√†");
-		densitaCol.setCellValueFactory(new PropertyValueFactory<>("densitaMedia"));
+		TableColumn<Filamento, Double> densitaConEll = new TableColumn<Filamento, Double>("Densit‡");
+		densitaConEll.setCellValueFactory(new PropertyValueFactory<>("densitaMedia"));
+		
+		TableColumn<Filamento, Double> temperaturaConEll = new TableColumn<Filamento, Double>("Temperatura");
+		temperaturaConEll.setCellValueFactory(new PropertyValueFactory<>("temperaturaMedia"));
+		
+		TableColumn<Filamento, Double> contrastoConEll = new TableColumn<Filamento, Double>("Contrasto");
+		contrastoConEll.setCellValueFactory(new PropertyValueFactory<>("contrasto"));
+		
+		TableColumn<Filamento, Double> flussoConEll = new TableColumn<Filamento, Double>("Flusso");
+		flussoConEll.setCellValueFactory(new PropertyValueFactory<>("flussoTotale"));
+		
+		TableColumn<Filamento, Double> ellitticitaConEll = new TableColumn<Filamento, Double>("Ellitticit‡");
+		ellitticitaConEll.setCellValueFactory(new PropertyValueFactory<>("elletticita"));
 
-		TableColumn ellitticitaCol = new TableColumn("Ellitticit√†");
-		ellitticitaCol.setCellValueFactory(new PropertyValueFactory<Filamento, Double>("elletticita"));
+		TableColumn<Filamento, String> strumentoConEll = new TableColumn<Filamento, String>("Strumento");
+		strumentoConEll.setCellValueFactory(new PropertyValueFactory<>("nomeStrumento"));
+		
+		TableColumn<Filamento, String> satelliteConEll = new TableColumn<Filamento, String>("Satellite");
+		satelliteConEll.setCellValueFactory(new PropertyValueFactory<>("nomeSatellite"));
+		
+		tableFilConEll.getColumns().addAll(idConEll, nomeConEll, densitaConEll , temperaturaConEll, contrastoConEll, flussoConEll, ellitticitaConEll, satelliteConEll, strumentoConEll);
+		
+		//--------------------------------------------------------
+		//RF 7
+		TableColumn<Filamento, String> nomeNumSeg = new TableColumn<Filamento, String>("Nome");
+		nomeNumSeg.setCellValueFactory(new PropertyValueFactory<>("nome"));
+		
+		TableColumn<Filamento, Integer> idNumSeg = new TableColumn<Filamento, Integer>("ID");
+		idNumSeg.setCellValueFactory(new PropertyValueFactory<>("ID"));
+		
+		TableColumn<Filamento, Double> densitaNumSeg = new TableColumn<Filamento, Double>("Densit‡");
+		densitaNumSeg.setCellValueFactory(new PropertyValueFactory<>("densitaMedia"));
+		
+		TableColumn<Filamento, Double> temperaturaNumSeg = new TableColumn<Filamento, Double>("Temperatura");
+		temperaturaNumSeg.setCellValueFactory(new PropertyValueFactory<>("temperaturaMedia"));
+		
+		TableColumn<Filamento, Double> contrastoNumSeg = new TableColumn<Filamento, Double>("Contrasto");
+		contrastoNumSeg.setCellValueFactory(new PropertyValueFactory<>("contrasto"));
+		
+		TableColumn<Filamento, Double> flussoNumSeg = new TableColumn<Filamento, Double>("Flusso");
+		flussoNumSeg.setCellValueFactory(new PropertyValueFactory<>("flussoTotale"));
+		
+		TableColumn<Filamento, Double> ellitticitaNumSeg = new TableColumn<Filamento, Double>("Ellitticit‡");
+		ellitticitaNumSeg.setCellValueFactory(new PropertyValueFactory<>("elletticita"));
 
-		TableColumn contrastoCol = new TableColumn("Contrasto");
-		contrastoCol.setCellValueFactory(new PropertyValueFactory<>("contrasto"));
+		TableColumn<Filamento, String> strumentoNumSeg = new TableColumn<Filamento, String>("Strumento");
+		strumentoNumSeg.setCellValueFactory(new PropertyValueFactory<>("nomeStrumento"));
+		
+		TableColumn<Filamento, String> satelliteNumSeg = new TableColumn<Filamento, String>("Satellite");
+		satelliteNumSeg.setCellValueFactory(new PropertyValueFactory<>("nomeSatellite"));
+		
+		tableFilNumSeg.getColumns().addAll(idNumSeg, nomeNumSeg, densitaNumSeg, temperaturaNumSeg, contrastoNumSeg, flussoNumSeg, ellitticitaNumSeg, satelliteNumSeg, strumentoNumSeg);
+		
+		
+		
+		TableColumn<Filamento, String> nomeRegione = new TableColumn<Filamento, String>("Nome");
+		nomeRegione.setCellValueFactory(new PropertyValueFactory<>("nome"));
+		
+		TableColumn<Filamento, Integer> idRegione = new TableColumn<Filamento, Integer>("ID");
+		idRegione.setCellValueFactory(new PropertyValueFactory<>("ID"));
+		
+		TableColumn<Filamento, Double> densitaRegione = new TableColumn<Filamento, Double>("Densit‡");
+		densitaRegione.setCellValueFactory(new PropertyValueFactory<>("densitaMedia"));
+		
+		TableColumn<Filamento, Double> temperaturaRegione = new TableColumn<Filamento, Double>("Temperatura");
+		temperaturaRegione.setCellValueFactory(new PropertyValueFactory<>("temperaturaMedia"));
+		
+		TableColumn<Filamento, Double> contrastoRegione = new TableColumn<Filamento, Double>("Contrasto");
+		contrastoRegione.setCellValueFactory(new PropertyValueFactory<>("contrasto"));
+		
+		TableColumn<Filamento, Double> flussoRegione = new TableColumn<Filamento, Double>("Flusso");
+		flussoRegione.setCellValueFactory(new PropertyValueFactory<>("flussoTotale"));
+		
+		TableColumn<Filamento, Double> ellitticitaRegione = new TableColumn<Filamento, Double>("Ellitticit‡");
+		ellitticitaRegione.setCellValueFactory(new PropertyValueFactory<>("elletticita"));
 
-		TableColumn flussoCol = new TableColumn("Flusso");
-		flussoCol.setCellValueFactory(new PropertyValueFactory<>("flussoTotale"));
-
-		TableColumn temperaturaCol = new TableColumn("Temperatura");
-		temperaturaCol.setCellValueFactory(new PropertyValueFactory<>("temperaturaMedia"));
-
-		TableColumn strumentoCol = new TableColumn("Strumento");
-		strumentoCol.setCellValueFactory(new PropertyValueFactory<>("nomeStrumento"));
-
-		TableColumn satelliteCol = new TableColumn("Satellite");
-		satelliteCol.setCellValueFactory(new PropertyValueFactory<>("nomeSatellite"));
-
-		tableFilConEll.getColumns().addAll(idCol, nameCol, contrastoCol, densitaCol, ellitticitaCol, flussoCol,
-				temperaturaCol, satelliteCol, strumentoCol);
-
-		tableFilNumSeg.getColumns().addAll(idCol, nameCol, contrastoCol, densitaCol, ellitticitaCol, flussoCol,
-				temperaturaCol, satelliteCol, strumentoCol);
-
-		tableFilRegione.getColumns().addAll(idCol, nameCol, contrastoCol, densitaCol, ellitticitaCol, flussoCol,
-				temperaturaCol, satelliteCol, strumentoCol);
+		TableColumn<Filamento, String> strumentoRegione = new TableColumn<Filamento, String>("Strumento");
+		strumentoRegione.setCellValueFactory(new PropertyValueFactory<>("nomeStrumento"));
+		
+		TableColumn<Filamento, String> satelliteRegione = new TableColumn<Filamento, String>("Satellite");
+		satelliteRegione.setCellValueFactory(new PropertyValueFactory<>("nomeSatellite"));
+		
+		
+		tableFilRegione.getColumns().addAll(idRegione, nomeRegione, contrastoRegione, densitaRegione, ellitticitaRegione, flussoRegione,
+				temperaturaRegione, satelliteRegione, strumentoRegione);
 
 		// TableView Stelle RF9
-		TableColumn idStellaCol = new TableColumn("ID");
+		TableColumn<Stella, Integer> idStellaCol = new TableColumn<Stella, Integer>("ID");
 		idStellaCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 
 		TableColumn latCol = new TableColumn("Latitudine");
@@ -1267,7 +1330,7 @@ public class adminBoundary implements Initializable {
 		TableColumn tipologiaCol = new TableColumn("tipologia");
 		tipologiaCol.setCellValueFactory(new PropertyValueFactory<>("tipologia"));
 
-		tableStelleInFilamento.getColumns().addAll(idStellaCol, nameCol, latCol, lonCol, flussoStellaCol, tipologiaCol);
+		tableStelleInFilamento.getColumns().addAll(idStellaCol, latCol, lonCol, flussoStellaCol, tipologiaCol);
 
 		// TableView RF 12
 
@@ -1276,7 +1339,14 @@ public class adminBoundary implements Initializable {
 
 		TableColumn flussoBeanCol = new TableColumn("Flusso");
 		flussoBeanCol.setCellValueFactory(new PropertyValueFactory<>("flusso"));
+		
+		TableColumn<BeanStella, String> nomeStella = new TableColumn<BeanStella,String>("Nome");
+		nomeStella.setCellValueFactory(new PropertyValueFactory<>("nome"));
+		
+		TableColumn<BeanStella, Integer> idStella = new TableColumn<BeanStella,Integer>("ID");
+		idStella.setCellValueFactory(new PropertyValueFactory<>("id"));
+		
 
-		tableStelleSpina.getColumns().addAll(idStellaCol, nameCol, distanzaCol, flussoBeanCol);
+		tableStelleSpina.getColumns().addAll(nomeStella,idStella, distanzaCol, flussoBeanCol);
 	}
 }

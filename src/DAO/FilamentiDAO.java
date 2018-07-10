@@ -74,7 +74,7 @@ public class FilamentiDAO {
 		int parziale;
 		filamenti = ricercaContEll(brillanza, Emin, Emax);
 		totale = countFilamenti();
-		parziale = countFilamentiContEll(brillanza, Emin, Emax);
+		parziale = filamenti.size();
 		bean = new BeanFilamentiConEll(filamenti, totale, parziale);
 		return bean;
 	}
@@ -526,17 +526,19 @@ public class FilamentiDAO {
 		String nomeStrumento;
 		String nomeSatellite;
 		Filamento fil;
+		Double contrastoValue = (double) (brillanza /100);
+		contrastoValue += 1;
 		try {
 			connection = DriverManager.getConnection("jdbc:postgresql:ProgettoDB", "postgres", "postgres");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		try {
-			String sql = "SELECT * FROM filamento WHERE contrasto >= (1+(?/100)) AND ? < ellitticita AND ellitticita < ?";
+			String sql = "SELECT * FROM filamento WHERE contrasto > ? AND ellitticita > ? AND ellitticita < ?";
 			stmt = connection.prepareStatement(sql);
-			stmt.setInt(1, brillanza);
-			stmt.setDouble(3, Emin);
-			stmt.setDouble(2, Emax);
+			stmt.setDouble(1, contrastoValue);
+			stmt.setDouble(2, Emin);
+			stmt.setDouble(3, Emax);
 			resultSet = stmt.executeQuery();
 			while (resultSet.next()) {
 				ID = resultSet.getInt("ID");

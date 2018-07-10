@@ -19,7 +19,7 @@ public class ScheletroDAO {
 		ArrayList<posContorno> contorno;
 		double distanza = 0;
 		double distMin = Integer.MAX_VALUE;
-		double distMax = Integer.MIN_VALUE;
+		double distMax = Integer.MAX_VALUE;
 		posScheletro min = null;
 		posScheletro max = null;
 		int idFil = -1;
